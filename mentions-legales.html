@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mentions Légales — 1Password Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #080c14;
+      --bg2: #0d1220;
+      --card: #131c2e;
+      --border: #1f2e4a;
+      --accent: #3b82f6;
+      --accent2: #60a5fa;
+      --text: #e2e8f0;
+      --text2: #94a3b8;
+      --text3: #64748b;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: #1d4ed8; border-radius: 3px; }
+
+    nav {
+      position: fixed; top:0; left:0; right:0; z-index:1000;
+      background: rgba(8,12,20,0.9);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 1.1rem;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, #3b82f6, #a855f7);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .back-btn {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px 16px;
+      color: var(--text2);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .back-btn:hover { color: var(--text); border-color: #263550; }
+
+    main {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 7rem 2rem 5rem;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .page-tag {
+      display: inline-block;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 5px 16px;
+      font-size: 0.78rem;
+      color: var(--accent2);
+      margin-bottom: 1.5rem;
+      letter-spacing: 1px;
+    }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .last-update {
+      font-size: 0.85rem;
+      color: var(--text3);
+    }
+
+    .ml-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .ml-card h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--accent2);
+      margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 10px;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ml-card p, .ml-card li {
+      color: var(--text2);
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .ml-card ul { list-style: none; }
+    .ml-card ul li { padding-left: 1.2rem; position: relative; }
+    .ml-card ul li::before {
+      content: '→';
+      position: absolute; left: 0;
+      color: var(--accent);
+    }
+
+    .ml-card strong { color: var(--text); }
+
+    .info-row {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 0.5rem 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .info-label {
+      color: var(--text3);
+      font-size: 0.88rem;
+      font-weight: 500;
+    }
+
+    .info-val {
+      color: var(--text2);
+      font-size: 0.88rem;
+    }
+
+    .info-val a { color: var(--accent2); text-decoration: none; }
+    .info-val a:hover { text-decoration: underline; }
+
+    .disclaimer {
+      background: linear-gradient(135deg, rgba(249,115,22,0.08), rgba(249,115,22,0.03));
+      border: 1px solid rgba(249,115,22,0.25);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .disclaimer h3 {
+      color: #f97316;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    .disclaimer p { color: var(--text2); font-size: 0.9rem; }
+
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--text3);
+    }
+
+    footer a { color: var(--accent2); text-decoration: none; }
+
+    @media (max-width: 600px) {
+      .info-row { grid-template-columns: 1fr; gap: 0; }
+      .info-label { font-size: 0.8rem; margin-top: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <div class="logo-icon">🔐</div>
+    1Password Guide
+  </a>
+  <a href="index.html" class="back-btn">← Retour au guide</a>
+</nav>
+
+<main>
+  <div class="page-header">
+    <div class="page-tag">📄 INFORMATIONS LÉGALES</div>
+    <h1>Mentions Légales</h1>
+    <p class="last-update">Dernière mise à jour : Fevrier 2026</p>
+  </div>
+
+  <div class="disclaimer">
+    <h3>⚠️ Important avant de lire</h3>
+    <p>Ce site est un projet pédagogique personnel, hébergé gratuitement sur GitHub Pages. Il n'est pas affilié à, sponsorisé par, ou approuvé par <strong>AgileBits Inc.</strong> (éditeur de 1Password). Toutes les marques mentionnées appartiennent à leurs propriétaires respectifs.</p>
+  </div>
+
+  <!-- Éditeur -->
+  <div class="ml-card">
+    <h2>🧑‍💻 Éditeur du site</h2>
+    <div class="info-row"><span class="info-label">Nom</span><span class="info-val"><strong>Nollan DROGUET</strong></span></div>
+    <div class="info-row"><span class="info-label">Statut</span><span class="info-val">Étudiant en BTS SIO option SISR</span></div>
+    <div class="info-row"><span class="info-label">Localisation</span><span class="info-val">Rennes, Bretagne, France</span></div>
+    <div class="info-row"><span class="info-label">Email de contact</span><span class="info-val"><a href="mailto:nollandroguetpro@gmail.com">nollandroguetpro@gmail.com</a></span></div>
+    <div class="info-row"><span class="info-label">Nature du site</span><span class="info-val">Projet pédagogique personnel — à titre non commercial</span></div>
+  </div>
+
+  <!-- Hébergement -->
+  <div class="ml-card">
+    <h2>🖥️ Hébergement</h2>
+    <div class="info-row"><span class="info-label">Hébergeur</span><span class="info-val"><strong>GitHub Pages</strong></span></div>
+    <div class="info-row"><span class="info-label">Éditeur de la plateforme</span><span class="info-val">GitHub Inc. — Microsoft Corporation</span></div>
+    <div class="info-row"><span class="info-label">Adresse</span><span class="info-val">88 Colin P Kelly Jr St, San Francisco, CA 94107, États-Unis</span></div>
+    <div class="info-row"><span class="info-label">Site</span><span class="info-val"><a href="https://pages.github.com" target="_blank" rel="noopener">pages.github.com</a></span></div>
+    <div class="info-row"><span class="info-label">Politique de confidentialité</span><span class="info-val"><a href="https://docs.github.com/fr/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">Voir la politique GitHub</a></span></div>
+    <p style="margin-top:1rem;">GitHub Pages est un service d'hébergement statique gratuit fourni par GitHub. Aucun serveur personnel n'est utilisé pour ce projet.</p>
+  </div>
+
+  <!-- Propriété intellectuelle -->
+  <div class="ml-card">
+    <h2>©️ Propriété intellectuelle</h2>
+    <p>Le contenu rédactionnel de ce site (textes, explications, mises en page) a été créé par <strong>Nollan DROGUET</strong>. Toute reproduction, totale ou partielle, est soumise à autorisation préalable.</p>
+
+    <p>Les éléments suivants sont la propriété exclusive de leurs détenteurs respectifs :</p>
+    <ul>
+      <li><strong>1Password®</strong> et son logo sont des marques déposées d'<strong>AgileBits Inc.</strong></li>
+      <li>Les concepts et fonctionnalités décrits appartiennent à leurs créateurs.</li>
+      <li>Les algorithmes cryptographiques mentionnés (AES-256, PBKDF2, HMAC-SHA1) sont des standards publics documentés.</li>
+    </ul>
+
+    <p>Ce site est un guide pédagogique indépendant. Il ne reproduit aucun contenu protégé appartenant à 1Password ou AgileBits.</p>
+  </div>
+
+  <!-- Données personnelles -->
+  <div class="ml-card">
+    <h2>🔒 Données personnelles (RGPD)</h2>
+    <p>Ce site <strong>ne collecte aucune donnée personnelle</strong>. En particulier :</p>
+    <ul>
+      <li>Aucun cookie publicitaire ou de traçage n'est utilisé.</li>
+      <li>Aucun formulaire ne collecte vos informations.</li>
+      <li>La démo de mot de passe fonctionne entièrement dans votre navigateur (côté client). Rien n'est envoyé à un serveur.</li>
+      <li>Aucun outil d'analyse (Google Analytics, Matomo, etc.) n'est intégré.</li>
+    </ul>
+    <p>GitHub Pages peut collecter des données de navigation basiques (adresse IP, date/heure, pages visitées) à des fins de statistiques agrégées. Consultez la <a href="https://docs.github.com/fr/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">politique de confidentialité GitHub</a> pour plus d'informations.</p>
+    <p>Conformément au <strong>Règlement Général sur la Protection des Données (RGPD)</strong> et à la loi Informatique et Libertés, vous disposez d'un droit d'accès, de rectification et d'opposition aux informations vous concernant. Pour l'exercer : <a href="mailto:nollandroguetpro@gmail.com">nollandroguetpro@gmail.com</a>.</p>
+  </div>
+
+  <!-- Cookies -->
+  <div class="ml-card">
+    <h2>🍪 Cookies</h2>
+    <p>Ce site n'utilise <strong>aucun cookie</strong>, ni fonctionnel, ni analytique, ni publicitaire. Aucune information n'est stockée localement sur votre navigateur via des mécanismes de cookies ou de stockage local (localStorage, sessionStorage).</p>
+  </div>
+
+  <!-- Responsabilité -->
+  <div class="ml-card">
+    <h2>⚖️ Limitation de responsabilité</h2>
+    <p>Les informations présentées sur ce site sont fournies <strong>à titre purement éducatif et informatif</strong>. Bien que le plus grand soin ait été apporté à leur exactitude :</p>
+    <ul>
+      <li>L'éditeur ne peut être tenu responsable d'erreurs ou d'omissions dans le contenu.</li>
+      <li>Les procédures décrites peuvent évoluer avec les mises à jour de 1Password.</li>
+      <li>Ce site n'engage pas la responsabilité d'AgileBits Inc. ni de toute autre entreprise citée.</li>
+      <li>Pour toute question relative à votre sécurité informatique en entreprise, consultez votre service IT.</li>
+    </ul>
+    <p>L'éditeur décline toute responsabilité quant à l'usage qui pourrait être fait des informations présentées.</p>
+  </div>
+
+  <!-- Liens externes -->
+  <div class="ml-card">
+    <h2>🔗 Liens hypertextes</h2>
+    <p>Ce site peut contenir des liens vers des sites tiers (notamment le site officiel de 1Password). Ces liens sont fournis à titre informatif. L'éditeur :</p>
+    <ul>
+      <li>N'est pas responsable du contenu des sites tiers référencés.</li>
+      <li>Ne contrôle pas ces sites et leur politique de confidentialité.</li>
+      <li>Ne perçoit aucune rémunération pour ces liens (aucun lien d'affiliation).</li>
+    </ul>
+  </div>
+
+  <!-- Droit applicable -->
+  <div class="ml-card">
+    <h2>🏛️ Droit applicable et juridiction</h2>
+    <div class="info-row"><span class="info-label">Droit applicable</span><span class="info-val">Droit français</span></div>
+    <div class="info-row"><span class="info-label">Langue du contrat</span><span class="info-val">Français</span></div>
+    <div class="info-row"><span class="info-label">Juridiction compétente</span><span class="info-val">Tribunaux de Rennes (Bretagne, France)</span></div>
+    <p style="margin-top:1rem;">En cas de litige, les parties s'engagent à rechercher une solution amiable avant tout recours judiciaire.</p>
+  </div>
+
+  <!-- Contact -->
+  <div class="ml-card">
+    <h2>📬 Contact</h2>
+    <p>Pour toute question relative à ce site, au contenu, ou à l'exercice de vos droits :</p>
+    <div class="info-row"><span class="info-label">Email</span><span class="info-val"><a href="mailto:nollandroguetpro@gmail.com">nollandroguetpro@gmail.com</a></span></div>
+    <div class="info-row"><span class="info-label">Délai de réponse</span><span class="info-val">Dans la mesure du possible, sous 7 jours ouvrés</span></div>
+    <p style="margin-top:1rem; font-size:0.88rem; color:var(--text3);">Ce projet étant réalisé dans un cadre personnel et étudiant, le délai de réponse peut varier selon les périodes académiques.</p>
+  </div>
+
+</main>
+
+<footer>
+  <p>© 2026 <strong style="color:var(--text2)">Nollan DROGUET</strong> — Étudiant BTS SIO SISR — Rennes, France</p>
+  <p style="margin-top:0.5rem;">
+    <a href="index.html">← Retour au guide 1Password</a> &nbsp;|&nbsp;
+    <a href="mailto:nollandroguetpro@gmail.com">nollandroguetpro@gmail.com</a>
+  </p>
+  <p style="margin-top:0.75rem; font-size:0.8rem;">1Password® est une marque déposée d'AgileBits Inc. — Ce site n'est pas affilié à AgileBits.</p>
+</footer>
+
+</body>
+</html>
