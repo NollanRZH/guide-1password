@@ -5,110 +5,172 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>1Password - Guide Complet | Par Nollan DROGUET</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #080c14;
-      --bg2: #0d1220;
-      --bg3: #111827;
-      --card: #131c2e;
-      --card2: #1a2540;
-      --border: #1f2e4a;
-      --border2: #263550;
-      --accent: #3b82f6;
-      --accent2: #60a5fa;
-      --accent3: #1d4ed8;
-      --green: #22c55e;
-      --green2: #16a34a;
-      --red: #ef4444;
-      --orange: #f97316;
-      --purple: #a855f7;
-      --yellow: #eab308;
-      --text: #e2e8f0;
-      --text2: #94a3b8;
-      --text3: #64748b;
-      --glow: rgba(59,130,246,0.15);
-      --glow2: rgba(59,130,246,0.08);
+      --bg:      #07090f;
+      --bg2:     #0b0f1a;
+      --bg3:     #0f1525;
+      --card:    #111827;
+      --card2:   #162035;
+      --border:  rgba(255,255,255,0.07);
+      --border2: rgba(255,255,255,0.12);
+      --accent:  #4f8ef7;
+      --accent2: #7fb3ff;
+      --accent3: #2563eb;
+      --green:   #34d399;
+      --red:     #f87171;
+      --orange:  #fb923c;
+      --purple:  #c084fc;
+      --text:    #f0f4ff;
+      --text2:   #8fa3c8;
+      --text3:   #4a5f82;
+      --glow:    rgba(79,142,247,0.12);
     }
 
-    * { margin:0; padding:0; box-sizing:border-box; }
-
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
     html { scroll-behavior: smooth; }
 
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 16px;
-      line-height: 1.7;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      line-height: 1.75;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* ===== SCROLLBAR ===== */
-    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--accent3); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb { background: #2563eb; border-radius: 4px; }
+
+    /* ===== PROGRESS ===== */
+    #reading-progress {
+      position: fixed; top:0; left:0; right:0; z-index:9999;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--purple));
+      transform-origin: left;
+      transform: scaleX(0);
+    }
 
     /* ===== NAV ===== */
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      background: rgba(8,12,20,0.9);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 2rem;
-      height: 64px;
+      position: fixed; top:0; left:0; right:0; z-index:1000;
+      height: 60px;
       display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem;
+      background: rgba(7,9,15,0.85);
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
     }
 
     .nav-logo {
-      display: flex; align-items: center; gap: 10px;
-      font-family: 'Syne', sans-serif;
-      font-weight: 800; font-size: 1.1rem;
+      display: flex; align-items: center; gap: 9px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700; font-size: 1rem;
       color: var(--text);
       text-decoration: none;
+      letter-spacing: -0.01em;
     }
 
-    .nav-logo .logo-icon {
-      width: 36px; height: 36px;
+    .logo-icon {
+      width: 32px; height: 32px;
       background: linear-gradient(135deg, var(--accent), var(--purple));
-      border-radius: 10px;
+      border-radius: 8px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.1rem;
+      font-size: 0.95rem;
+      flex-shrink: 0;
     }
 
-    .nav-links {
-      display: flex; gap: 0.2rem;
-      list-style: none;
-    }
+    .nav-links { display: flex; gap: 2px; list-style: none; }
 
     .nav-links a {
       color: var(--text2);
       text-decoration: none;
-      font-size: 0.85rem;
-      padding: 6px 12px;
-      border-radius: 8px;
-      transition: all 0.2s;
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 5px 10px;
+      border-radius: 7px;
+      transition: all 0.18s;
       white-space: nowrap;
     }
     .nav-links a:hover { color: var(--text); background: var(--card); }
 
     .nav-cta {
-      background: var(--accent);
+      background: var(--accent3) !important;
       color: #fff !important;
-      font-weight: 500 !important;
     }
-    .nav-cta:hover { background: var(--accent3) !important; }
+    .nav-cta:hover { opacity: 0.9; }
 
     .hamburger {
       display: none;
-      flex-direction: column; gap: 5px;
+      flex-direction: column; gap: 4px;
       cursor: pointer; padding: 4px;
+      background: none; border: none;
     }
     .hamburger span {
-      display: block; width: 24px; height: 2px;
+      display: block; width: 22px; height: 2px;
       background: var(--text2); border-radius: 2px;
       transition: all 0.3s;
     }
+
+    .nav-mobile-menu {
+      display: none;
+      position: fixed; top: 60px; left:0; right:0;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      padding: 0.75rem 1rem;
+      z-index: 999;
+      flex-direction: column; gap: 2px;
+    }
+    .nav-mobile-menu.open { display: flex; }
+    .nav-mobile-menu a {
+      color: var(--text2);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: all 0.18s;
+    }
+    .nav-mobile-menu a:hover { color: var(--text); background: var(--card); }
+
+    /* ===== TOC FLOAT ===== */
+    .toc-float {
+      position: fixed; right: 1.5rem; top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+      display: flex; flex-direction: column; gap: 7px;
+    }
+
+    .toc-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--border2);
+      cursor: pointer;
+      transition: all 0.25s;
+      position: relative;
+    }
+    .toc-dot:hover, .toc-dot.active {
+      background: var(--accent);
+      transform: scale(1.5);
+    }
+    .toc-dot::after {
+      content: attr(data-label);
+      position: absolute; right: 16px; top: 50%;
+      transform: translateY(-50%);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 3px 8px;
+      font-size: 0.7rem;
+      color: var(--text2);
+      white-space: nowrap;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.18s;
+    }
+    .toc-dot:hover::after { opacity: 1; }
 
     /* ===== HERO ===== */
     .hero {
@@ -116,1060 +178,676 @@
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
       text-align: center;
-      padding: 8rem 2rem 4rem;
-      position: relative;
-      overflow: hidden;
+      padding: 7rem 1.5rem 4rem;
+      position: relative; overflow: hidden;
     }
 
-    .hero::before {
-      content: '';
+    .hero-glow {
       position: absolute;
-      width: 800px; height: 800px;
-      background: radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%);
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(79,142,247,0.1) 0%, transparent 65%);
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       pointer-events: none;
     }
 
-    .hero::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231f2e4a' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-      opacity: 0.3;
-      pointer-events: none;
-    }
-
     .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--card);
-      border: 1px solid var(--border);
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(79,142,247,0.08);
+      border: 1px solid rgba(79,142,247,0.2);
       border-radius: 50px;
-      padding: 6px 16px;
-      font-size: 0.8rem;
+      padding: 5px 14px;
+      font-size: 0.75rem;
+      font-weight: 500;
       color: var(--accent2);
-      margin-bottom: 2rem;
+      margin-bottom: 1.75rem;
       position: relative; z-index: 1;
-      animation: fadeInUp 0.6s ease both;
+      animation: fadeUp 0.5s ease both;
     }
 
     .badge-dot {
-      width: 8px; height: 8px;
+      width: 6px; height: 6px;
       background: var(--green);
       border-radius: 50%;
-      animation: pulse 2s infinite;
+      animation: pulse 2.5s infinite;
     }
 
     @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.8); }
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
     .hero h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(2.5rem, 7vw, 5.5rem);
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2.2rem, 6vw, 5rem);
       font-weight: 800;
-      line-height: 1.05;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
       position: relative; z-index: 1;
-      animation: fadeInUp 0.6s 0.1s ease both;
+      animation: fadeUp 0.5s 0.08s ease both;
     }
 
-    .hero h1 .gradient-text {
-      background: linear-gradient(135deg, var(--accent2), var(--purple));
+    .gradient-text {
+      background: linear-gradient(135deg, var(--accent2) 0%, var(--purple) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
     .hero-sub {
-      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
       color: var(--text2);
-      max-width: 650px;
-      margin: 1.5rem auto;
+      font-weight: 400;
+      max-width: 560px;
+      margin: 1.25rem auto 0;
+      line-height: 1.7;
       position: relative; z-index: 1;
-      animation: fadeInUp 0.6s 0.2s ease both;
+      animation: fadeUp 0.5s 0.16s ease both;
     }
 
     .hero-actions {
-      display: flex; gap: 1rem; justify-content: center;
-      flex-wrap: wrap;
+      display: flex; gap: 0.75rem;
+      justify-content: center; flex-wrap: wrap;
+      margin-top: 2rem;
       position: relative; z-index: 1;
-      animation: fadeInUp 0.6s 0.3s ease both;
+      animation: fadeUp 0.5s 0.24s ease both;
     }
 
     .btn-primary {
       background: var(--accent);
       color: #fff;
-      padding: 14px 28px;
-      border-radius: 12px;
-      font-size: 0.95rem;
-      font-weight: 500;
+      padding: 11px 22px;
+      border-radius: 10px;
+      font-size: 0.875rem;
+      font-weight: 600;
       text-decoration: none;
-      transition: all 0.2s;
-      display: inline-flex; align-items: center; gap: 8px;
-      box-shadow: 0 0 30px rgba(59,130,246,0.3);
+      display: inline-flex; align-items: center; gap: 7px;
+      transition: all 0.18s;
+      box-shadow: 0 0 24px rgba(79,142,247,0.25);
     }
-    .btn-primary:hover {
-      background: var(--accent3);
-      transform: translateY(-2px);
-      box-shadow: 0 0 40px rgba(59,130,246,0.5);
-    }
+    .btn-primary:hover { background: var(--accent3); transform: translateY(-1px); box-shadow: 0 0 32px rgba(79,142,247,0.4); }
 
     .btn-secondary {
       background: var(--card);
       color: var(--text);
       border: 1px solid var(--border);
-      padding: 14px 28px;
-      border-radius: 12px;
-      font-size: 0.95rem;
+      padding: 11px 22px;
+      border-radius: 10px;
+      font-size: 0.875rem;
       font-weight: 500;
       text-decoration: none;
-      transition: all 0.2s;
+      transition: all 0.18s;
     }
-    .btn-secondary:hover {
-      background: var(--card2);
-      border-color: var(--border2);
-      transform: translateY(-2px);
-    }
+    .btn-secondary:hover { background: var(--card2); border-color: var(--border2); transform: translateY(-1px); }
 
     .hero-stats {
       display: flex; gap: 2rem; justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 4rem;
+      flex-wrap: wrap; margin-top: 3.5rem;
       position: relative; z-index: 1;
-      animation: fadeInUp 0.6s 0.4s ease both;
+      animation: fadeUp 0.5s 0.32s ease both;
     }
-
-    .stat {
-      text-align: center;
-    }
-
     .stat-num {
-      font-family: 'Syne', sans-serif;
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--accent2);
-      display: block;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.6rem; font-weight: 800;
+      color: var(--accent2); display: block;
+      letter-spacing: -0.02em;
     }
+    .stat-label { font-size: 0.72rem; color: var(--text3); font-weight: 500; }
 
-    .stat-label {
-      font-size: 0.8rem;
-      color: var(--text3);
+    /* ===== VAULT PREVIEW HERO ===== */
+    .hero-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.25rem;
+      margin: 3rem auto 0;
+      max-width: 440px; width: 100%;
+      position: relative; z-index: 1;
+      animation: fadeUp 0.5s 0.4s ease both;
+      text-align: left;
     }
+    .hero-card-bar {
+      display: flex; align-items: center; gap: 6px;
+      margin-bottom: 0.9rem;
+    }
+    .hero-card-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ===== SECTIONS GÉNÉRIQUES ===== */
-    section {
-      padding: 6rem 2rem;
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
+    /* ===== LAYOUT ===== */
+    section { padding: 5rem 1.5rem; }
+    .container { max-width: 1060px; margin: 0 auto; }
+    .section-alt { background: var(--bg2); }
 
     .section-label {
       display: inline-block;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 2px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
       text-transform: uppercase;
       color: var(--accent2);
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
     }
 
     .section-title {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.6rem);
       font-weight: 800;
       line-height: 1.15;
-      margin-bottom: 1rem;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.75rem;
     }
 
     .section-desc {
       color: var(--text2);
-      font-size: 1.05rem;
-      max-width: 600px;
-      margin-bottom: 3rem;
-    }
-
-    /* ===== CARDS ===== */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 2rem;
-      transition: all 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--accent), transparent);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    .card:hover {
-      border-color: var(--border2);
-      transform: translateY(-4px);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 30px var(--glow2);
-    }
-
-    .card:hover::before { opacity: 1; }
-
-    .card-icon {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      display: block;
-    }
-
-    .card h3 {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.15rem;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
-    }
-
-    .card p {
-      color: var(--text2);
-      font-size: 0.92rem;
+      font-size: 0.95rem;
+      max-width: 540px;
+      margin-bottom: 2.5rem;
       line-height: 1.7;
     }
 
-    /* ===== DIVIDER ===== */
     .divider {
       border: none;
       border-top: 1px solid var(--border);
       margin: 0;
     }
 
-    /* ===== ALTERNATE BG ===== */
-    .section-alt { background: var(--bg2); }
+    /* ===== CARDS ===== */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+    }
 
-    /* ===== HIGHLIGHT BOX ===== */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem;
+      transition: all 0.22s;
+      position: relative; overflow: hidden;
+    }
+    .card:hover {
+      border-color: var(--border2);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+    }
+    .card-icon { font-size: 1.75rem; margin-bottom: 0.75rem; display: block; }
+    .card h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem; font-weight: 700;
+      margin-bottom: 0.5rem; letter-spacing: -0.01em;
+    }
+    .card p { color: var(--text2); font-size: 0.84rem; line-height: 1.7; }
+
+    /* ===== BOXES ===== */
+    .info-box, .warning-box, .success-box {
+      display: flex; gap: 1rem;
+      border-radius: 12px;
+      padding: 1.25rem 1.4rem;
+      margin: 1.25rem 0;
+    }
+    .info-box {
+      background: rgba(79,142,247,0.06);
+      border: 1px solid rgba(79,142,247,0.2);
+    }
+    .warning-box {
+      background: rgba(251,146,60,0.06);
+      border: 1px solid rgba(251,146,60,0.2);
+    }
+    .success-box {
+      background: rgba(52,211,153,0.06);
+      border: 1px solid rgba(52,211,153,0.2);
+    }
+    .info-icon, .warning-icon, .success-icon { font-size: 1.25rem; flex-shrink: 0; margin-top: 1px; }
+    .info-content h4 { color: var(--accent2); font-size: 0.88rem; font-weight: 600; margin-bottom: 0.3rem; }
+    .warning-content h4 { color: var(--orange); font-size: 0.88rem; font-weight: 600; margin-bottom: 0.3rem; }
+    .success-content h4 { color: var(--green); font-size: 0.88rem; font-weight: 600; margin-bottom: 0.3rem; }
+    .info-content p, .warning-content p, .success-content p { font-size: 0.84rem; color: var(--text2); line-height: 1.65; }
+
+    /* ===== HIGHLIGHT ===== */
     .highlight-box {
-      background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(168,85,247,0.1));
-      border: 1px solid rgba(59,130,246,0.3);
-      border-radius: 20px;
-      padding: 2rem;
-      margin: 2rem 0;
+      background: rgba(79,142,247,0.06);
+      border: 1px solid rgba(79,142,247,0.18);
+      border-radius: 14px;
+      padding: 1.75rem;
+      margin: 1.5rem 0;
     }
-
     .highlight-box.green {
-      background: linear-gradient(135deg, rgba(34,197,94,0.1), rgba(16,163,74,0.05));
-      border-color: rgba(34,197,94,0.3);
-    }
-
-    .highlight-box.red {
-      background: linear-gradient(135deg, rgba(239,68,68,0.1), rgba(239,68,68,0.05));
-      border-color: rgba(239,68,68,0.3);
-    }
-
-    .highlight-box.orange {
-      background: linear-gradient(135deg, rgba(249,115,22,0.1), rgba(249,115,22,0.05));
-      border-color: rgba(249,115,22,0.3);
+      background: rgba(52,211,153,0.06);
+      border-color: rgba(52,211,153,0.2);
     }
 
     /* ===== STEPS ===== */
-    .steps {
-      display: flex; flex-direction: column; gap: 0;
-    }
-
-    .step {
-      display: flex; gap: 2rem;
-      position: relative;
-    }
-
-    .step-left {
-      display: flex; flex-direction: column; align-items: center;
-      min-width: 48px;
-    }
-
+    .steps { display: flex; flex-direction: column; }
+    .step { display: flex; gap: 1.5rem; }
+    .step-left { display: flex; flex-direction: column; align-items: center; min-width: 40px; }
     .step-num {
-      width: 48px; height: 48px;
+      width: 40px; height: 40px;
       background: var(--card2);
-      border: 2px solid var(--accent);
+      border: 1.5px solid var(--accent3);
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1rem;
-      color: var(--accent2);
-      flex-shrink: 0;
-      z-index: 1;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700; font-size: 0.85rem;
+      color: var(--accent2); flex-shrink: 0; z-index: 1;
     }
-
     .step-line {
-      flex: 1;
-      width: 2px;
+      flex: 1; width: 1.5px;
       background: var(--border);
-      margin: 8px 0;
+      margin: 6px 0;
     }
-
     .step:last-child .step-line { display: none; }
-
-    .step-content {
-      padding-bottom: 2.5rem;
-      flex: 1;
-    }
-
+    .step-content { padding-bottom: 2rem; flex: 1; }
     .step-content h3 {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
-      margin-top: 10px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600; font-size: 0.95rem;
+      margin-bottom: 0.35rem; margin-top: 8px;
+      letter-spacing: -0.01em;
     }
-
-    .step-content p {
-      color: var(--text2);
-      font-size: 0.92rem;
-    }
+    .step-content p { color: var(--text2); font-size: 0.84rem; line-height: 1.68; }
 
     /* ===== TERMINAL ===== */
     .terminal {
-      background: #0a0f1a;
+      background: #060a14;
       border: 1px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
-      margin: 1.5rem 0;
+      border-radius: 12px; overflow: hidden;
+      margin: 1.25rem 0;
     }
-
     .terminal-bar {
       background: var(--card);
-      padding: 12px 16px;
-      display: flex; align-items: center; gap: 8px;
+      padding: 10px 14px;
+      display: flex; align-items: center; gap: 7px;
       border-bottom: 1px solid var(--border);
     }
-
-    .t-dot {
-      width: 12px; height: 12px;
-      border-radius: 50%;
-    }
+    .t-dot { width: 11px; height: 11px; border-radius: 50%; }
     .t-dot.red { background: #ff5f57; }
     .t-dot.yellow { background: #ffbd2e; }
     .t-dot.green { background: #28c840; }
-
     .terminal-body {
-      padding: 1.5rem;
+      padding: 1.25rem 1.4rem;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
-      line-height: 1.8;
+      font-size: 0.78rem; line-height: 1.9;
+    }
+    .t-comment { color: #3a4a63; }
+    .t-key { color: #7fb3ff; }
+    .t-val { color: #86efac; }
+    .t-red { color: #f87171; }
+    .t-green { color: #34d399; }
+    .t-orange { color: #fb923c; }
+    .t-purple { color: #c084fc; }
+
+    /* ===== FEATURE ROW ===== */
+    .feature-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem; align-items: center;
+    }
+    @media (max-width: 768px) {
+      .feature-row { grid-template-columns: 1fr; gap: 1.5rem; }
     }
 
-    .t-comment { color: #4a5568; }
-    .t-key { color: #60a5fa; }
-    .t-val { color: #a3e635; }
-    .t-red { color: var(--red); }
-    .t-green { color: var(--green); }
-    .t-orange { color: var(--orange); }
-    .t-purple { color: var(--purple); }
-    .t-yellow { color: var(--yellow); }
+    /* ===== NUM LIST ===== */
+    .num-list { list-style: none; }
+    .num-list li { display: flex; gap: 0.9rem; margin-bottom: 0.9rem; align-items: flex-start; }
+    .num-badge {
+      background: var(--accent3); color: #fff;
+      width: 22px; height: 22px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.72rem; font-weight: 700; flex-shrink: 0; margin-top: 2px;
+    }
+    .num-text { font-size: 0.86rem; color: var(--text2); line-height: 1.65; }
+    .num-text strong { color: var(--text); }
 
     /* ===== PASSWORD DEMO ===== */
     .password-demo {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 2rem;
-      margin: 2rem 0;
+      border-radius: 14px; padding: 1.75rem;
+      margin: 1.5rem 0;
     }
-
-    .pwd-input-wrap {
-      position: relative;
-      margin-bottom: 1rem;
-    }
-
+    .pwd-input-wrap { position: relative; margin-bottom: 0.75rem; }
     .pwd-input {
       width: 100%;
       background: var(--bg);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 14px 48px 14px 16px;
+      border-radius: 10px;
+      padding: 12px 44px 12px 14px;
       color: var(--text);
       font-family: 'JetBrains Mono', monospace;
-      font-size: 1rem;
-      outline: none;
-      transition: border-color 0.2s;
+      font-size: 0.88rem; outline: none;
+      transition: border-color 0.18s;
     }
     .pwd-input:focus { border-color: var(--accent); }
-
     .pwd-toggle {
-      position: absolute; right: 14px; top: 50%;
+      position: absolute; right: 12px; top: 50%;
       transform: translateY(-50%);
-      background: none; border: none; color: var(--text3);
-      cursor: pointer; font-size: 1.1rem;
-      transition: color 0.2s;
+      background: none; border: none;
+      color: var(--text3); cursor: pointer; font-size: 1rem;
+      transition: color 0.18s;
     }
-    .pwd-toggle:hover { color: var(--text); }
-
+    .pwd-toggle:hover { color: var(--text2); }
     .pwd-strength {
-      height: 6px;
-      background: var(--bg);
-      border-radius: 3px;
-      overflow: hidden;
-      margin-bottom: 0.75rem;
+      height: 4px; background: var(--bg);
+      border-radius: 4px; overflow: hidden; margin-bottom: 0.6rem;
     }
-
     .pwd-strength-bar {
-      height: 100%;
-      border-radius: 3px;
-      transition: all 0.4s;
-      width: 0%;
-      background: var(--red);
+      height: 100%; border-radius: 4px;
+      transition: all 0.35s; width: 0%;
     }
-
     .pwd-info {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-      margin-top: 1rem;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0.75rem; margin-top: 1rem;
     }
-
     .pwd-info-box {
       background: var(--bg);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1rem;
+      border-radius: 10px; padding: 0.9rem;
     }
-
     .pwd-info-label {
-      font-size: 0.75rem;
-      color: var(--text3);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 0.5rem;
+      font-size: 0.68rem; color: var(--text3);
+      text-transform: uppercase; letter-spacing: 1.2px;
+      margin-bottom: 0.35rem; font-weight: 600;
     }
-
     .pwd-info-val {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 700;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem; font-weight: 700;
     }
-
     .hacker-view {
-      background: #0a0f1a;
-      border: 1px solid rgba(239,68,68,0.3);
-      border-radius: 12px;
-      padding: 1.5rem;
-      margin-top: 1rem;
+      background: #060a14;
+      border: 1px solid rgba(248,113,113,0.2);
+      border-radius: 10px; padding: 1.25rem; margin-top: 1rem;
     }
-
     .hacker-label {
-      font-size: 0.75rem;
-      color: var(--red);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 1rem;
-      display: flex; align-items: center; gap: 8px;
+      font-size: 0.68rem; color: var(--red);
+      text-transform: uppercase; letter-spacing: 2px;
+      margin-bottom: 0.75rem;
+      display: flex; align-items: center; gap: 7px;
     }
-
     .hacker-label::before {
       content: '';
-      width: 8px; height: 8px;
-      background: var(--red);
-      border-radius: 50%;
+      width: 6px; height: 6px;
+      background: var(--red); border-radius: 50%;
       animation: pulse 1.5s infinite;
     }
-
     .hacker-content {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.82rem;
-      color: #4ade80;
-      word-break: break-all;
+      font-size: 0.75rem; color: #4ade80;
+      word-break: break-all; line-height: 1.6;
     }
 
-    /* ===== MFA DEMO ===== */
+    /* ===== MFA ===== */
     .mfa-visual {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      margin: 2rem 0;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1rem; margin: 1.75rem 0;
     }
-
     .mfa-factor {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.5rem;
-      text-align: center;
-      transition: all 0.3s;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.4rem;
+      text-align: center; transition: all 0.22s;
     }
-
     .mfa-factor.active {
-      border-color: var(--accent);
-      box-shadow: 0 0 20px var(--glow);
+      border-color: rgba(79,142,247,0.4);
+      box-shadow: 0 0 20px rgba(79,142,247,0.08);
     }
+    .mfa-icon { font-size: 2.2rem; margin-bottom: 0.75rem; display: block; }
+    .mfa-name { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.85rem; margin-bottom: 0.4rem; }
+    .mfa-desc { font-size: 0.76rem; color: var(--text2); line-height: 1.6; }
 
-    .mfa-icon { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
-    .mfa-name {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 0.9rem;
-      margin-bottom: 0.5rem;
+    /* ===== TAG ===== */
+    .tag {
+      display: inline-block; padding: 2px 9px;
+      border-radius: 5px; font-size: 0.68rem; font-weight: 700;
+      margin-right: 4px; margin-bottom: 4px;
     }
-    .mfa-desc { font-size: 0.8rem; color: var(--text2); }
+    .tag-blue  { background: rgba(79,142,247,0.12); color: var(--accent2); }
+    .tag-green { background: rgba(52,211,153,0.12); color: var(--green); }
+    .tag-orange { background: rgba(251,146,60,0.12); color: var(--orange); }
 
-    /* ===== VAULT DEMO ===== */
+    /* ===== VAULT ===== */
     .vault-layout {
-      display: grid;
-      grid-template-columns: 240px 1fr;
-      gap: 1.5rem;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      overflow: hidden;
-      margin: 2rem 0;
+      display: grid; grid-template-columns: 220px 1fr;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 14px; overflow: hidden; margin: 1.75rem 0;
     }
-
     .vault-sidebar {
-      background: var(--bg2);
-      padding: 1.5rem;
+      background: var(--bg2); padding: 1.25rem;
       border-right: 1px solid var(--border);
     }
-
     .vault-sidebar h4 {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: var(--text3);
-      margin-bottom: 1rem;
+      font-size: 0.62rem; text-transform: uppercase;
+      letter-spacing: 2px; color: var(--text3);
+      font-weight: 700; margin-bottom: 0.75rem;
     }
-
     .vault-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 10px; border-radius: 8px;
+      cursor: default; margin-bottom: 2px;
+      transition: background 0.15s;
+    }
+    .vault-item.active { background: var(--card); border-left: 2px solid var(--accent); padding-left: 8px; }
+    .vault-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .vault-item span { font-size: 0.8rem; }
+    .vault-main { padding: 1.25rem; }
+    .vault-main h4 {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700; font-size: 0.9rem; margin-bottom: 0.9rem;
+    }
+    .vault-entry {
       display: flex; align-items: center; gap: 10px;
       padding: 10px 12px;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: all 0.2s;
-      margin-bottom: 4px;
-    }
-
-    .vault-item:hover, .vault-item.active {
-      background: var(--card);
-    }
-
-    .vault-item.active { border-left: 3px solid var(--accent); }
-
-    .vault-dot {
-      width: 10px; height: 10px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    .vault-item span {
-      font-size: 0.88rem;
-    }
-
-    .vault-main { padding: 1.5rem; }
-
-    .vault-main h4 {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 1rem;
-      margin-bottom: 1rem;
-    }
-
-    .vault-entry {
-      display: flex; align-items: center; gap: 12px;
-      padding: 12px;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      margin-bottom: 8px;
-      transition: all 0.2s;
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 10px; margin-bottom: 6px; transition: border-color 0.18s;
     }
     .vault-entry:hover { border-color: var(--border2); }
-
     .entry-logo {
-      width: 36px; height: 36px;
-      background: var(--card2);
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1rem;
-      flex-shrink: 0;
+      width: 32px; height: 32px; background: var(--card2);
+      border-radius: 7px; display: flex; align-items: center;
+      justify-content: center; font-size: 0.9rem; flex-shrink: 0;
     }
-
-    .entry-info { flex: 1; }
-    .entry-name { font-size: 0.9rem; font-weight: 500; }
-    .entry-user { font-size: 0.78rem; color: var(--text3); }
+    .entry-info { flex: 1; min-width: 0; }
+    .entry-name { font-size: 0.83rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .entry-user { font-size: 0.72rem; color: var(--text3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .entry-pwd {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.78rem;
-      color: var(--text3);
-      letter-spacing: 2px;
-    }
-
-    .vault-badge {
-      display: inline-block;
-      padding: 3px 10px;
-      border-radius: 50px;
-      font-size: 0.7rem;
-      font-weight: 600;
-    }
-
-    .badge-private { background: rgba(34,197,94,0.15); color: var(--green); }
-    .badge-shared { background: rgba(59,130,246,0.15); color: var(--accent2); }
-    .badge-family { background: rgba(168,85,247,0.15); color: var(--purple); }
-
-    /* ===== ENCRYPTION VISUAL ===== */
-    .encrypt-flow {
-      display: flex; align-items: center; gap: 1rem;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin: 2rem 0;
-    }
-
-    .encrypt-box {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.2rem 1.5rem;
-      text-align: center;
-      min-width: 140px;
-    }
-
-    .encrypt-box .e-label {
-      font-size: 0.72rem;
-      color: var(--text3);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 0.5rem;
-    }
-
-    .encrypt-box .e-val {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
-      word-break: break-all;
-    }
-
-    .encrypt-arrow {
-      font-size: 1.5rem;
-      color: var(--accent);
-    }
-
-    /* ===== EXPORT GUIDE ===== */
-    .export-steps {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 2rem;
-    }
-
-    /* ===== TIMELINE ===== */
-    .timeline {
-      position: relative;
-      padding-left: 2rem;
-    }
-
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 2px;
-      background: linear-gradient(to bottom, var(--accent), var(--purple));
-      border-radius: 2px;
-    }
-
-    .timeline-item {
-      position: relative;
-      padding-bottom: 2rem;
-    }
-
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: -2.4rem;
-      top: 4px;
-      width: 14px; height: 14px;
-      background: var(--accent);
-      border-radius: 50%;
-      border: 3px solid var(--bg);
-    }
-
-    .timeline-item h4 {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-
-    .timeline-item p { color: var(--text2); font-size: 0.92rem; }
-
-    /* ===== WARNING BOX ===== */
-    .warning-box {
-      display: flex; gap: 1rem;
-      background: rgba(249,115,22,0.08);
-      border: 1px solid rgba(249,115,22,0.3);
-      border-radius: 16px;
-      padding: 1.5rem;
-      margin: 1.5rem 0;
-    }
-
-    .warning-icon { font-size: 1.5rem; flex-shrink: 0; }
-    .warning-content h4 {
-      font-weight: 600; margin-bottom: 0.4rem;
-      color: var(--orange);
-    }
-    .warning-content p { font-size: 0.9rem; color: var(--text2); }
-
-    /* ===== INFO BOX ===== */
-    .info-box {
-      display: flex; gap: 1rem;
-      background: rgba(59,130,246,0.08);
-      border: 1px solid rgba(59,130,246,0.3);
-      border-radius: 16px;
-      padding: 1.5rem;
-      margin: 1.5rem 0;
-    }
-
-    .info-icon { font-size: 1.5rem; flex-shrink: 0; }
-    .info-content h4 {
-      font-weight: 600; margin-bottom: 0.4rem;
-      color: var(--accent2);
-    }
-    .info-content p { font-size: 0.9rem; color: var(--text2); }
-
-    /* ===== SUCCESS BOX ===== */
-    .success-box {
-      display: flex; gap: 1rem;
-      background: rgba(34,197,94,0.08);
-      border: 1px solid rgba(34,197,94,0.3);
-      border-radius: 16px;
-      padding: 1.5rem;
-      margin: 1.5rem 0;
-    }
-    .success-icon { font-size: 1.5rem; flex-shrink: 0; }
-    .success-content h4 {
-      font-weight: 600; margin-bottom: 0.4rem;
-      color: var(--green);
-    }
-    .success-content p { font-size: 0.9rem; color: var(--text2); }
-
-    /* ===== FAQ / ACCORDION ===== */
-    .faq-item {
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      margin-bottom: 1rem;
-      overflow: hidden;
-    }
-
-    .faq-q {
-      width: 100%;
-      background: var(--card);
-      border: none;
-      padding: 1.2rem 1.5rem;
-      text-align: left;
-      color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.95rem;
-      font-weight: 500;
-      cursor: pointer;
-      display: flex; justify-content: space-between; align-items: center;
-      transition: background 0.2s;
-    }
-
-    .faq-q:hover { background: var(--card2); }
-
-    .faq-icon {
-      font-size: 1.2rem;
-      color: var(--accent2);
-      transition: transform 0.3s;
+      font-size: 0.72rem; color: var(--text3); letter-spacing: 1px;
       flex-shrink: 0;
     }
-
-    .faq-item.open .faq-icon { transform: rotate(45deg); }
-
-    .faq-a {
-      background: var(--bg2);
-      padding: 0 1.5rem;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease, padding 0.3s;
-      color: var(--text2);
-      font-size: 0.92rem;
+    .vault-badge {
+      display: inline-block; padding: 2px 9px;
+      border-radius: 50px; font-size: 0.65rem; font-weight: 700;
     }
+    .badge-private { background: rgba(52,211,153,0.12); color: var(--green); }
 
-    .faq-item.open .faq-a {
-      max-height: 500px;
-      padding: 1.2rem 1.5rem;
+    /* ===== ENCRYPTION ===== */
+    .encrypt-flow {
+      display: flex; align-items: center; gap: 0.75rem;
+      flex-wrap: wrap; justify-content: center; margin: 1.75rem 0;
     }
-
-    /* ===== SCROLLSPY ACTIVE SECTION ===== */
-    .section-anchor { scroll-margin-top: 80px; }
-
-    /* ===== FLOATING TOC ===== */
-    .toc-float {
-      position: fixed;
-      right: 2rem;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 100;
-      display: flex; flex-direction: column; gap: 6px;
+    .encrypt-box {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1rem 1.25rem;
+      text-align: center; min-width: 130px;
     }
-
-    .toc-dot {
-      width: 10px; height: 10px;
-      border-radius: 50%;
-      background: var(--border2);
-      transition: all 0.3s;
-      cursor: pointer;
-      position: relative;
+    .encrypt-box .e-label {
+      font-size: 0.65rem; color: var(--text3);
+      text-transform: uppercase; letter-spacing: 1.2px;
+      margin-bottom: 0.4rem; font-weight: 600;
     }
-
-    .toc-dot:hover, .toc-dot.active {
-      background: var(--accent);
-      transform: scale(1.4);
+    .encrypt-box .e-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem; word-break: break-all;
     }
+    .encrypt-arrow { font-size: 1.2rem; color: var(--accent); flex-shrink: 0; }
 
-    .toc-dot::after {
-      content: attr(data-label);
-      position: absolute;
-      right: 18px;
-      top: 50%; transform: translateY(-50%);
-      background: var(--card);
+    /* ===== TIMELINE ===== */
+    .timeline { position: relative; padding-left: 1.75rem; }
+    .timeline::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 1.5px;
+      background: linear-gradient(to bottom, var(--accent), var(--purple));
+    }
+    .timeline-item { position: relative; padding-bottom: 1.75rem; }
+    .timeline-item::before {
+      content: '';
+      position: absolute; left: -2.2rem; top: 4px;
+      width: 12px; height: 12px;
+      background: var(--accent); border-radius: 50%;
+      border: 2.5px solid var(--bg);
+    }
+    .timeline-item h4 {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700; font-size: 0.9rem; margin-bottom: 0.35rem;
+      letter-spacing: -0.01em;
+    }
+    .timeline-item p { color: var(--text2); font-size: 0.83rem; line-height: 1.65; }
+
+    /* ===== FAQ ===== */
+    .faq-item {
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 4px 10px;
-      font-size: 0.75rem;
-      color: var(--text2);
-      white-space: nowrap;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s;
+      border-radius: 12px; margin-bottom: 0.75rem; overflow: hidden;
+    }
+    .faq-q {
+      width: 100%; background: var(--card); border: none;
+      padding: 1rem 1.25rem; text-align: left; color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.87rem; font-weight: 500; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 1rem; transition: background 0.18s;
+    }
+    .faq-q:hover { background: var(--card2); }
+    .faq-icon {
+      font-size: 1.1rem; color: var(--accent2);
+      transition: transform 0.28s; flex-shrink: 0;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-a {
+      background: var(--bg2); padding: 0 1.25rem;
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.25s;
+      color: var(--text2); font-size: 0.84rem; line-height: 1.7;
+    }
+    .faq-item.open .faq-a { max-height: 500px; padding: 1rem 1.25rem; }
+
+    /* ===== COMPARISON ===== */
+    .comparison { width: 100%; border-collapse: collapse; }
+    .comparison th, .comparison td {
+      padding: 0.9rem 1.1rem; text-align: left;
+      border-bottom: 1px solid var(--border); font-size: 0.83rem;
+    }
+    .comparison th {
+      font-family: 'Outfit', sans-serif; font-weight: 700;
+      color: var(--text3); font-size: 0.72rem;
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+    .comparison tr:last-child td { border-bottom: none; }
+    .comparison tr:hover td { background: rgba(255,255,255,0.02); }
+
+    /* ===== PROCEDURES TABS ===== */
+    .proc-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.75rem; }
+    .proc-tab {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 8px; padding: 7px 14px;
+      color: var(--text2); font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.78rem; font-weight: 500; cursor: pointer; transition: all 0.18s;
+    }
+    .proc-tab:hover { border-color: var(--border2); color: var(--text); }
+    .proc-tab.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .proc-content { display: none; }
+    .proc-content.active { display: block; }
+
+    /* ===== CODE ===== */
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82em; background: var(--card2);
+      padding: 2px 6px; border-radius: 4px; color: var(--accent2);
     }
 
-    .toc-dot:hover::after { opacity: 1; }
+    /* ===== TOTP card ===== */
+    #totpCode {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 2.2rem; font-weight: 500;
+      color: var(--accent2); letter-spacing: 6px;
+    }
 
     /* ===== FOOTER ===== */
     footer {
       background: var(--bg2);
       border-top: 1px solid var(--border);
-      padding: 4rem 2rem 2rem;
+      padding: 3.5rem 1.5rem 2rem;
     }
-
     .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 3rem;
-      max-width: 1100px;
-      margin: 0 auto 3rem;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 2.5rem; max-width: 1060px; margin: 0 auto 2.5rem;
     }
-
     .footer-brand p {
-      color: var(--text2);
-      font-size: 0.88rem;
-      margin-top: 1rem;
-      max-width: 280px;
+      color: var(--text3); font-size: 0.82rem;
+      margin-top: 0.75rem; max-width: 260px; line-height: 1.65;
     }
-
     .footer-col h5 {
-      font-family: 'Syne', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      color: var(--text);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.78rem; font-weight: 700;
+      margin-bottom: 0.9rem; color: var(--text2);
     }
-
     .footer-col a {
-      display: block;
-      color: var(--text3);
-      text-decoration: none;
-      font-size: 0.85rem;
-      margin-bottom: 0.6rem;
-      transition: color 0.2s;
+      display: block; color: var(--text3);
+      text-decoration: none; font-size: 0.8rem;
+      margin-bottom: 0.55rem; transition: color 0.18s;
     }
     .footer-col a:hover { color: var(--text2); }
-
     .footer-bottom {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border);
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 1rem;
+      max-width: 1060px; margin: 0 auto;
+      padding-top: 1.75rem; border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 0.75rem;
     }
+    .footer-bottom p { font-size: 0.76rem; color: var(--text3); }
+    .footer-bottom a { color: var(--accent2); text-decoration: none; }
 
-    .footer-bottom p {
-      font-size: 0.82rem;
-      color: var(--text3);
-    }
-
-    .footer-bottom a {
-      color: var(--accent2);
-      text-decoration: none;
-    }
-
-    /* ===== TAG ===== */
-    .tag {
-      display: inline-block;
-      padding: 3px 10px;
-      border-radius: 6px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      margin-right: 6px;
-      margin-bottom: 6px;
-    }
-    .tag-blue { background: rgba(59,130,246,0.15); color: var(--accent2); }
-    .tag-green { background: rgba(34,197,94,0.15); color: var(--green); }
-    .tag-purple { background: rgba(168,85,247,0.15); color: var(--purple); }
-    .tag-orange { background: rgba(249,115,22,0.15); color: var(--orange); }
+    /* ===== SECTION ANCHOR ===== */
+    .section-anchor { scroll-margin-top: 74px; }
 
     /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
     @media (max-width: 768px) {
       nav { padding: 0 1rem; }
       .nav-links { display: none; }
-      .nav-links.open {
-        display: flex; flex-direction: column;
-        position: fixed; top: 64px; left: 0; right: 0;
-        background: var(--bg2);
-        border-bottom: 1px solid var(--border);
-        padding: 1rem;
-        gap: 0.5rem;
-      }
       .hamburger { display: flex; }
       .toc-float { display: none; }
-
       .mfa-visual { grid-template-columns: 1fr; }
       .vault-layout { grid-template-columns: 1fr; }
       .vault-sidebar { border-right: none; border-bottom: 1px solid var(--border); }
-      .footer-grid { grid-template-columns: 1fr 1fr; }
       .pwd-info { grid-template-columns: 1fr; }
       .encrypt-flow { flex-direction: column; align-items: stretch; }
-      .encrypt-arrow { transform: rotate(90deg); text-align: center; }
-      .hero-stats { gap: 1.5rem; }
+      .encrypt-arrow { text-align: center; display: block; }
+      .hero-stats { gap: 1.25rem; }
+      .cards-grid { grid-template-columns: 1fr; }
+      section { padding: 3.5rem 1rem; }
     }
 
-    @media (max-width: 480px) {
-      .footer-grid { grid-template-columns: 1fr; }
-      .hero h1 { font-size: 2rem; }
+    @media (max-width: 520px) {
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .hero h1 { font-size: 1.9rem; }
+      .hero-stats { gap: 1rem; }
+      .stat-num { font-size: 1.3rem; }
+      .mfa-visual { grid-template-columns: 1fr; }
+      .comparison th:nth-child(2), .comparison td:nth-child(2) { display: none; }
     }
-
-    /* ===== PROGRESS BAR ===== */
-    #reading-progress {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
-      height: 3px;
-      background: linear-gradient(90deg, var(--accent), var(--purple));
-      transform-origin: left;
-      transform: scaleX(0);
-      transition: transform 0.1s;
-    }
-
-    /* ===== CODE INLINE ===== */
-    code {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85em;
-      background: var(--card2);
-      padding: 2px 6px;
-      border-radius: 4px;
-      color: var(--accent2);
-    }
-
-    /* ===== LARGE ICON ===== */
-    .feature-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-    }
-
-    .feature-row.reverse { direction: rtl; }
-    .feature-row.reverse > * { direction: ltr; }
-
-    @media (max-width: 768px) {
-      .feature-row, .feature-row.reverse { grid-template-columns: 1fr; direction: ltr; }
-    }
-
-    /* ===== NUMBER LIST ===== */
-    .num-list { list-style: none; }
-    .num-list li {
-      display: flex; gap: 1rem;
-      margin-bottom: 1rem;
-      align-items: flex-start;
-    }
-    .num-list li .num-badge {
-      background: var(--accent3);
-      color: #fff;
-      width: 26px; height: 26px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.8rem;
-      font-weight: 700;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-    .num-list li .num-text { font-size: 0.92rem; color: var(--text2); }
-    .num-list li .num-text strong { color: var(--text); }
-
-    /* ===== HERO FLOATING CARD ===== */
-    .hero-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 1.5rem;
-      margin: 4rem auto 0;
-      max-width: 480px;
-      position: relative; z-index: 1;
-      animation: fadeInUp 0.6s 0.5s ease both;
-      text-align: left;
-    }
-
-    .hero-card-bar {
-      display: flex; align-items: center; gap: 8px;
-      margin-bottom: 1rem;
-    }
-
-    .hero-card-dot { width: 8px; height: 8px; border-radius: 50%; }
-
-    /* ===== COMPARISON TABLE ===== */
-    .comparison {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    .comparison th, .comparison td {
-      padding: 1rem 1.2rem;
-      text-align: left;
-      border-bottom: 1px solid var(--border);
-      font-size: 0.9rem;
-    }
-
-    .comparison th {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      color: var(--text2);
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .comparison tr:last-child td { border-bottom: none; }
-    .comparison tr:hover td { background: var(--card2); }
-
-    .check { color: var(--green); }
-    .cross { color: var(--red); }
   </style>
 </head>
 <body>
 
 <div id="reading-progress"></div>
 
-<!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">
+  <a href="#hero" class="nav-logo">
     <div class="logo-icon">🔐</div>
     1Password Guide
   </a>
@@ -1184,68 +862,83 @@
     <li><a href="#faq">FAQ</a></li>
     <li><a href="mentions-legales.html" class="nav-cta">Mentions légales</a></li>
   </ul>
-  <div class="hamburger" id="hamburger" onclick="toggleNav()">
+  <button class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Menu">
     <span></span><span></span><span></span>
-  </div>
+  </button>
 </nav>
 
-<!-- TOC FLOAT -->
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="#cest-quoi" onclick="closeMobile()">C'est quoi ?</a>
+  <a href="#pourquoi" onclick="closeMobile()">Pourquoi ?</a>
+  <a href="#chiffrement" onclick="closeMobile()">Chiffrement</a>
+  <a href="#mfa" onclick="closeMobile()">MFA</a>
+  <a href="#coffres" onclick="closeMobile()">Coffres</a>
+  <a href="#procedures" onclick="closeMobile()">Procédures</a>
+  <a href="#retraite" onclick="closeMobile()">Retraite</a>
+  <a href="#faq" onclick="closeMobile()">FAQ</a>
+  <a href="mentions-legales.html" style="color:var(--accent2);">Mentions légales</a>
+</div>
+
 <div class="toc-float">
-  <div class="toc-dot active" data-label="Accueil" onclick="scrollTo('#hero')"></div>
-  <div class="toc-dot" data-label="C'est quoi ?" onclick="scrollTo('#cest-quoi')"></div>
-  <div class="toc-dot" data-label="Pourquoi ?" onclick="scrollTo('#pourquoi')"></div>
-  <div class="toc-dot" data-label="Chiffrement" onclick="scrollTo('#chiffrement')"></div>
-  <div class="toc-dot" data-label="MFA" onclick="scrollTo('#mfa')"></div>
-  <div class="toc-dot" data-label="Coffres" onclick="scrollTo('#coffres')"></div>
-  <div class="toc-dot" data-label="Procédures" onclick="scrollTo('#procedures')"></div>
-  <div class="toc-dot" data-label="Retraite" onclick="scrollTo('#retraite')"></div>
-  <div class="toc-dot" data-label="FAQ" onclick="scrollTo('#faq')"></div>
+  <div class="toc-dot active" data-label="Accueil"      onclick="goTo('#hero')"></div>
+  <div class="toc-dot"        data-label="C'est quoi ?" onclick="goTo('#cest-quoi')"></div>
+  <div class="toc-dot"        data-label="Pourquoi ?"   onclick="goTo('#pourquoi')"></div>
+  <div class="toc-dot"        data-label="Chiffrement"  onclick="goTo('#chiffrement')"></div>
+  <div class="toc-dot"        data-label="MFA"          onclick="goTo('#mfa')"></div>
+  <div class="toc-dot"        data-label="Coffres"      onclick="goTo('#coffres')"></div>
+  <div class="toc-dot"        data-label="Procédures"   onclick="goTo('#procedures')"></div>
+  <div class="toc-dot"        data-label="Retraite"     onclick="goTo('#retraite')"></div>
+  <div class="toc-dot"        data-label="FAQ"          onclick="goTo('#faq')"></div>
 </div>
 
 <!-- ===== HERO ===== -->
 <section class="hero" id="hero">
+  <div class="hero-glow"></div>
+
   <div class="hero-badge">
     <span class="badge-dot"></span>
-    Guide complet — Niveau débutant
+    Guide complet &middot; Niveau débutant
   </div>
+
   <h1>
     Tout comprendre sur<br>
     <span class="gradient-text">1Password</span>
   </h1>
+
   <p class="hero-sub">
-    Le gestionnaire de mots de passe de votre entreprise, expliqué simplement. Même si vous n'êtes pas informaticien. Même si vous avez 80 ans. Vraiment. ;-)
+    Le gestionnaire de mots de passe de votre entreprise, expliqué simplement. Même si vous n'êtes pas informaticien. Même si vous avez 80 ans.
   </p>
+
   <div class="hero-actions">
     <a href="#cest-quoi" class="btn-primary">🚀 Commencer la lecture</a>
     <a href="#procedures" class="btn-secondary">📋 Voir les procédures</a>
   </div>
 
   <div class="hero-stats">
-    <div class="stat">
+    <div>
       <span class="stat-num">AES-256</span>
       <span class="stat-label">Chiffrement militaire</span>
     </div>
-    <div class="stat">
+    <div>
       <span class="stat-num">0</span>
       <span class="stat-label">Mots de passe lisibles</span>
     </div>
-    <div class="stat">
-      <span class="stat-num">∞</span>
+    <div>
+      <span class="stat-num">&#8734;</span>
       <span class="stat-label">Mots de passe stockables</span>
     </div>
-    <div class="stat">
+    <div>
       <span class="stat-num">100%</span>
       <span class="stat-label">Privé par défaut</span>
     </div>
   </div>
 
-  <!-- Mini preview -->
   <div class="hero-card">
     <div class="hero-card-bar">
       <div class="hero-card-dot" style="background:#ff5f57"></div>
       <div class="hero-card-dot" style="background:#ffbd2e"></div>
       <div class="hero-card-dot" style="background:#28c840"></div>
-      <span style="font-size:0.8rem; color:var(--text3); margin-left:8px;">1Password — Coffre "Employé"</span>
+      <span style="font-size:0.72rem;color:var(--text3);margin-left:6px;">1Password &mdash; Coffre &quot;Employé&quot;</span>
     </div>
     <div class="vault-entry">
       <div class="entry-logo">📧</div>
@@ -1253,7 +946,7 @@
         <div class="entry-name">Messagerie d'entreprise</div>
         <div class="entry-user">jean.dupont@monentreprise.fr</div>
       </div>
-      <div class="entry-pwd">••••••••••••</div>
+      <div class="entry-pwd">••••••••••</div>
     </div>
     <div class="vault-entry">
       <div class="entry-logo">💻</div>
@@ -1261,7 +954,7 @@
         <div class="entry-name">Intranet RH</div>
         <div class="entry-user">jdupont</div>
       </div>
-      <div class="entry-pwd">••••••••••••</div>
+      <div class="entry-pwd">••••••••••</div>
     </div>
     <div class="vault-entry">
       <div class="entry-logo">🏦</div>
@@ -1269,9 +962,9 @@
         <div class="entry-name">Banque pro</div>
         <div class="entry-user">jean.dupont</div>
       </div>
-      <div class="entry-pwd">••••••••••••</div>
+      <div class="entry-pwd">••••••••••</div>
     </div>
-    <div style="margin-top:1rem; font-size:0.8rem; color:var(--text3); display:flex; align-items:center; gap:6px;">
+    <div style="margin-top:0.9rem;font-size:0.73rem;color:var(--text3);display:flex;align-items:center;gap:6px;">
       🔒 <span>Vos mots de passe, uniquement pour vous</span>
       <span class="vault-badge badge-private">Privé</span>
     </div>
@@ -1285,7 +978,7 @@
   <div class="container">
     <span class="section-label">📦 Comprendre les bases</span>
     <h2 class="section-title">Mais c'est quoi, 1Password ?</h2>
-    <p class="section-desc">Imaginez un coffre-fort numérique ultra-sécurisé qui retient tous vos mots de passe à votre place.</p>
+    <p class="section-desc">Un coffre-fort numérique ultra-sécurisé qui retient tous vos mots de passe à votre place.</p>
 
     <div class="feature-row">
       <div>
@@ -1293,32 +986,32 @@
           <div class="info-icon">💡</div>
           <div class="info-content">
             <h4>L'analogie parfaite</h4>
-            <p>Pensez à un trousseau de clés. Vous avez des dizaines de clés (mots de passe) pour des dizaines de serrures (sites web, applications). 1Password est votre trousseau sécurisé, qui en plus <strong>crée les meilleures clés possibles</strong> et les retient pour vous.</p>
+            <p>Pensez à un trousseau de clés. Vous avez des dizaines de clés (mots de passe) pour des dizaines de serrures (sites web, applications). 1Password est votre trousseau sécurisé, qui <strong>crée les meilleures clés possibles</strong> et les retient pour vous.</p>
           </div>
         </div>
 
-        <p style="margin-bottom:1rem; color: var(--text2);">Sans 1Password, la plupart des gens font l'une de ces erreurs :</p>
+        <p style="margin-bottom:0.9rem;color:var(--text2);font-size:0.88rem;">Sans 1Password, la plupart des gens font l'une de ces erreurs :</p>
 
         <ul class="num-list">
           <li>
-            <div class="num-badge" style="background:var(--red)">✗</div>
-            <div class="num-text"><strong>Le même mot de passe partout</strong> — Si un site est piraté, tous vos comptes tombent en même temps.</div>
+            <div class="num-badge" style="background:#ef4444">✗</div>
+            <div class="num-text"><strong>Le même mot de passe partout.</strong> Si un site est piraté, tous vos comptes tombent en même temps.</div>
           </li>
           <li>
-            <div class="num-badge" style="background:var(--red)">✗</div>
-            <div class="num-text"><strong>Des mots de passe simples</strong> — "Dupont2026!" est crackable en quelques secondes par un ordinateur.</div>
+            <div class="num-badge" style="background:#ef4444">✗</div>
+            <div class="num-text"><strong>Des mots de passe trop simples.</strong> "Dupont2026" est crackable en quelques secondes par un ordinateur.</div>
           </li>
           <li>
-            <div class="num-badge" style="background:var(--red)">✗</div>
-            <div class="num-text"><strong>Écrire ses mots de passe</strong> — Sur un post-it, dans un carnet, dans un fichier Excel non chiffré...</div>
+            <div class="num-badge" style="background:#ef4444">✗</div>
+            <div class="num-text"><strong>Les noter quelque part.</strong> Un post-it, un carnet, un fichier Excel non chiffré... tout ça peut être lu par n'importe qui.</div>
           </li>
         </ul>
 
-        <div class="success-box" style="margin-top:1.5rem">
+        <div class="success-box" style="margin-top:1.25rem">
           <div class="success-icon">✅</div>
           <div class="success-content">
             <h4>Avec 1Password, c'est réglé</h4>
-            <p>Un seul mot de passe maître à retenir. 1Password s'occupe du reste : génération, stockage, remplissage automatique, tout.</p>
+            <p>Un seul mot de passe maître à retenir. 1Password s'occupe du reste : génération, stockage, remplissage automatique.</p>
           </div>
         </div>
       </div>
@@ -1326,40 +1019,37 @@
       <div>
         <div class="terminal">
           <div class="terminal-bar">
-            <div class="t-dot red"></div>
-            <div class="t-dot yellow"></div>
-            <div class="t-dot green"></div>
-            <span style="font-size:0.8rem; color:var(--text3); margin-left:8px;">Comparaison rapide</span>
+            <div class="t-dot red"></div><div class="t-dot yellow"></div><div class="t-dot green"></div>
+            <span style="font-size:0.72rem;color:var(--text3);margin-left:8px;">Comparaison rapide</span>
           </div>
           <div class="terminal-body">
-<span class="t-comment">// ❌ AVANT 1Password</span>
-<span class="t-red">Messagerie    :</span> <span class="t-orange">dupont2026</span>
-<span class="t-red">Intranet      :</span> <span class="t-orange">dupont2026</span>
-<span class="t-red">Amazon perso  :</span> <span class="t-orange">dupont2026</span>
-<span class="t-red">Banque        :</span> <span class="t-orange">1234</span>
+<span class="t-comment">// Sans 1Password</span>
+<span class="t-red">Messagerie :</span> <span class="t-orange">dupont2026</span>
+<span class="t-red">Intranet   :</span> <span class="t-orange">dupont2026</span>
+<span class="t-red">Amazon     :</span> <span class="t-orange">dupont2026</span>
+<span class="t-red">Banque     :</span> <span class="t-orange">1234</span>
 <span class="t-comment">→ 1 piratage = TOUT perdu</span>
 
-<span class="t-comment">// ✅ AVEC 1Password</span>
-<span class="t-green">Messagerie    :</span> <span class="t-val">K#9mP!vQ2rXw&Lz</span>
-<span class="t-green">Intranet      :</span> <span class="t-val">bN7@qYd4$Hj3mWs</span>
-<span class="t-green">Amazon perso  :</span> <span class="t-val">Xp2#Kc8!nZv6&Rq</span>
-<span class="t-green">Banque        :</span> <span class="t-val">Wm9$Lp3@Yd7#Bkn</span>
+<span class="t-comment">// Avec 1Password</span>
+<span class="t-green">Messagerie :</span> <span class="t-val">K#9mP!vQ2rXw&amp;Lz</span>
+<span class="t-green">Intranet   :</span> <span class="t-val">bN7@qYd4$Hj3mWs</span>
+<span class="t-green">Amazon     :</span> <span class="t-val">Xp2#Kc8!nZv6&amp;Rq</span>
+<span class="t-green">Banque     :</span> <span class="t-val">Wm9$Lp3@Yd7#Bkn</span>
 <span class="t-comment">→ Chaque site a sa clé unique</span>
-<span class="t-comment">→ Vous n'en retenez AUCUN</span>
-<span class="t-comment">→ 1Password les retient tous</span>
+<span class="t-comment">→ Vous n'en retenez aucun</span>
           </div>
         </div>
 
-        <div class="cards-grid" style="margin-top:1.5rem;">
-          <div class="card" style="padding:1.2rem;">
+        <div class="cards-grid" style="margin-top:1.25rem;">
+          <div class="card" style="padding:1.25rem;">
             <span class="card-icon">🏭</span>
-            <h3 style="font-size:0.95rem">Qui l'utilise ?</h3>
-            <p>Des millions d'entreprises, des équipes production, RH, direction, IT. 1Password est fait pour TOUT le monde, pas seulement les informaticiens.</p>
+            <h3>Qui l'utilise ?</h3>
+            <p>Des millions d'entreprises, des équipes production, RH, direction, IT. C'est fait pour tout le monde, pas seulement les informaticiens.</p>
           </div>
-          <div class="card" style="padding:1.2rem;">
+          <div class="card" style="padding:1.25rem;">
             <span class="card-icon">🌍</span>
-            <h3 style="font-size:0.95rem">Partout avec vous</h3>
-            <p>PC, Mac, iPhone, Android, navigateur web. Vos mots de passe vous suivent partout, synchronisés en temps réel.</p>
+            <h3>Partout avec vous</h3>
+            <p>PC, Mac, iPhone, Android, navigateur. Vos mots de passe vous suivent partout, synchronisés en temps réel.</p>
           </div>
         </div>
       </div>
@@ -1370,57 +1060,54 @@
 <hr class="divider">
 
 <!-- ===== POURQUOI ===== -->
-<section class="section-alt" id="pourquoi">
+<section class="section-alt" id="pourquoi" class="section-anchor">
   <div class="container">
     <span class="section-label">🛡️ La menace réelle</span>
     <h2 class="section-title">Pourquoi c'est si important ?</h2>
     <p class="section-desc">La cybersécurité, ce n'est pas que pour les films. Les hackers s'attaquent à tout le monde, tout le temps.</p>
 
-    <div class="cards-grid" style="margin-bottom:3rem;">
+    <div class="cards-grid" style="margin-bottom:2.5rem;">
       <div class="card">
         <span class="card-icon">⚡</span>
         <h3>Les chiffres qui font peur</h3>
-        <p>Un hacker teste <strong style="color:var(--red)">10 milliards de mots de passe par seconde</strong> avec un simple ordinateur de jeu. "Dupont2026" est trouvé en moins d'une minute.</p>
+        <p>Un hacker teste <strong style="color:var(--red)">10 milliards de mots de passe par seconde</strong> avec un ordinateur de jeu grand public. "Dupont2026" est trouvé en moins d'une minute.</p>
       </div>
       <div class="card">
         <span class="card-icon">🌐</span>
         <h3>Les fuites de données</h3>
-        <p>Des millions de mots de passe sont volés chaque année sur de grands sites. Si votre mot de passe est dans la liste, les hackers l'essaient sur <strong style="color:var(--red)">TOUS vos autres comptes</strong>.</p>
+        <p>Des millions de mots de passe sont volés chaque année sur de grands sites. Si le vôtre y figure, les hackers l'essaient sur <strong style="color:var(--red)">tous vos autres comptes</strong>.</p>
       </div>
       <div class="card">
         <span class="card-icon">🎭</span>
         <h3>L'usurpation d'identité</h3>
-        <p>Un compte volé peut servir à envoyer des emails en votre nom, accéder à vos données personnelles, ou même accéder aux systèmes de votre entreprise.</p>
+        <p>Un compte volé peut servir à envoyer des emails en votre nom, accéder à vos données ou aux systèmes de votre entreprise.</p>
       </div>
       <div class="card">
         <span class="card-icon">💸</span>
         <h3>Le coût réel</h3>
-        <p>Une violation de données coûte en moyenne <strong style="color:var(--red)">4,45 millions d'euros</strong> à une entreprise. À l'échelle individuelle, cela peut signifier des années de problèmes.</p>
+        <p>Une violation de données coûte en moyenne <strong style="color:var(--red)">4,45 millions d'euros</strong> à une entreprise. À l'échelle individuelle, c'est des années de problèmes.</p>
       </div>
     </div>
 
-    <!-- Password Demo Interactive -->
-    <h3 class="section-title" style="font-size:1.8rem; margin-bottom:1rem;">🔬 Testez la force de votre mot de passe</h3>
-    <p style="color:var(--text2); margin-bottom:1.5rem; font-size:0.92rem;">Tapez un mot de passe ci-dessous pour voir ce qu'en pense un hacker (rien n'est envoyé, tout se passe dans votre navigateur) :</p>
+    <h3 style="font-family:'Outfit',sans-serif;font-weight:700;margin-bottom:0.75rem;font-size:1.3rem;">🔬 Testez la force de votre mot de passe</h3>
+    <p style="color:var(--text2);margin-bottom:1.25rem;font-size:0.86rem;">Rien n'est envoyé nulle part, tout se passe dans votre navigateur.</p>
 
     <div class="password-demo">
       <div class="pwd-input-wrap">
         <input type="password" class="pwd-input" id="pwdInput" placeholder="Tapez un mot de passe..." oninput="analyzePwd(this.value)">
         <button class="pwd-toggle" onclick="togglePwd()" id="pwdToggle">👁️</button>
       </div>
-      <div class="pwd-strength">
-        <div class="pwd-strength-bar" id="pwdBar"></div>
-      </div>
-      <div id="pwdLabel" style="font-size:0.85rem; color:var(--text3); margin-bottom:1rem;">En attente de saisie...</div>
+      <div class="pwd-strength"><div class="pwd-strength-bar" id="pwdBar"></div></div>
+      <div id="pwdLabel" style="font-size:0.8rem;color:var(--text3);margin-bottom:1rem;">En attente de saisie...</div>
 
       <div class="pwd-info">
         <div class="pwd-info-box">
           <div class="pwd-info-label">Temps pour le cracker</div>
-          <div class="pwd-info-val" id="crackTime">—</div>
+          <div class="pwd-info-val" id="crackTime">&#8212;</div>
         </div>
         <div class="pwd-info-box">
-          <div class="pwd-info-label">Entropie (complexité)</div>
-          <div class="pwd-info-val" id="entropy">— bits</div>
+          <div class="pwd-info-label">Entropie</div>
+          <div class="pwd-info-val" id="entropy">&#8212; bits</div>
         </div>
         <div class="pwd-info-box">
           <div class="pwd-info-label">Longueur</div>
@@ -1428,22 +1115,20 @@
         </div>
         <div class="pwd-info-box">
           <div class="pwd-info-label">Score</div>
-          <div class="pwd-info-val" id="pwdScore">—/10</div>
+          <div class="pwd-info-val" id="pwdScore">&#8212;/10</div>
         </div>
       </div>
 
       <div class="hacker-view">
-        <div class="hacker-label">👾 Vue du hacker — Hash SHA-256 de votre mot de passe</div>
-        <div class="hacker-content" id="hackerView">
-          Entrez un mot de passe pour voir ce que voit vraiment la base de données...
-        </div>
+        <div class="hacker-label">👾 Vue du hacker &mdash; Hash de votre mot de passe</div>
+        <div class="hacker-content" id="hackerView">Entrez un mot de passe pour voir ce que voit vraiment la base de données...</div>
       </div>
 
       <div class="success-box" style="margin-top:1rem;">
         <div class="success-icon">💡</div>
         <div class="success-content">
           <h4>Ce que ça signifie</h4>
-          <p>Même si un hacker vole la base de données, il ne voit que ce hash obscur (la ligne verte ci-dessus), jamais votre vrai mot de passe. Mais si le mot de passe est simple, il peut quand même le retrouver en comparant des millions de hashs précalculés (attaque par "dictionnaire").</p>
+          <p>Même si un hacker vole la base de données, il ne voit que ce hash illisible (la ligne verte ci-dessus), jamais votre vrai mot de passe. Mais si le mot de passe est simple, il peut quand même le retrouver en comparant des millions de hashs précalculés.</p>
         </div>
       </div>
     </div>
@@ -1451,8 +1136,8 @@
     <div class="warning-box">
       <div class="warning-icon">⚠️</div>
       <div class="warning-content">
-        <h4>Un mot de passe parfait recommandé par 1Password</h4>
-        <p>1Password génère automatiquement des mots de passe comme <code>K#9mP!vQ2rXw&Lz8@Bn</code>. Temps pour le cracker : <strong style="color:var(--green)">des milliers de milliards d'années</strong>. Et vous n'avez même pas besoin de le retenir !</p>
+        <h4>Un mot de passe idéal selon 1Password</h4>
+        <p>1Password génère automatiquement des mots de passe comme <code>K#9mP!vQ2rXw&amp;Lz8@Bn</code>. Temps pour le cracker : <strong style="color:var(--green)">des milliers de milliards d'années.</strong> Et vous n'avez pas besoin de le retenir.</p>
       </div>
     </div>
   </div>
@@ -1465,125 +1150,120 @@
   <div class="container">
     <span class="section-label">🔬 La science derrière</span>
     <h2 class="section-title">Comment fonctionne le chiffrement ?</h2>
-    <p class="section-desc">Pas besoin d'un doctorat. Voici comment vos données sont protégées, expliqué comme si vous aviez 12 ans.</p>
+    <p class="section-desc">Pas besoin d'un doctorat. Voici comment vos données sont protégées, expliqué simplement.</p>
 
     <div class="info-box">
       <div class="info-icon">📬</div>
       <div class="info-content">
         <h4>L'analogie de la boîte aux lettres</h4>
-        <p>Imaginez une boîte aux lettres avec un code à cadenas. Vous donnez votre code à vos amis pour qu'ils puissent y mettre des lettres. Mais seul vous pouvez ouvrir la boîte avec votre clé secrète. C'est exactement le principe du chiffrement asymétrique utilisé par 1Password.</p>
+        <p>Imaginez une boîte aux lettres avec un cadenas à code. Vous donnez le code à vos amis pour qu'ils y déposent des lettres. Mais seul vous pouvez ouvrir la boîte avec votre clé secrète. C'est le principe du chiffrement asymétrique utilisé par 1Password.</p>
       </div>
     </div>
 
-    <!-- Encryption flow visual -->
-    <h3 style="font-family:'Syne',sans-serif; font-weight:700; margin:2rem 0 1rem; font-size:1.2rem;">🔄 Le voyage de votre mot de passe</h3>
+    <h3 style="font-family:'Outfit',sans-serif;font-weight:700;margin:1.75rem 0 0.9rem;font-size:1.1rem;">Le voyage de votre mot de passe</h3>
 
     <div class="encrypt-flow">
       <div class="encrypt-box">
         <div class="e-label">Votre saisie</div>
         <div class="e-val" style="color:var(--text)">MonMotDePasse</div>
       </div>
-      <div class="encrypt-arrow">→</div>
+      <div class="encrypt-arrow">&#8594;</div>
       <div class="encrypt-box">
         <div class="e-label">Dérivation PBKDF2</div>
-        <div class="e-val" style="color:var(--orange)">131 072 itérations</div>
+        <div class="e-val" style="color:var(--orange)">131 072 tours</div>
       </div>
-      <div class="encrypt-arrow">→</div>
+      <div class="encrypt-arrow">&#8594;</div>
       <div class="encrypt-box">
         <div class="e-label">Clé AES-256</div>
-        <div class="e-val" style="color:var(--accent2)">256 bits de clé</div>
+        <div class="e-val" style="color:var(--accent2)">256 bits</div>
       </div>
-      <div class="encrypt-arrow">→</div>
-      <div class="encrypt-box" style="border-color:rgba(34,197,94,0.3)">
+      <div class="encrypt-arrow">&#8594;</div>
+      <div class="encrypt-box" style="border-color:rgba(52,211,153,0.3)">
         <div class="e-label">Données chiffrées</div>
         <div class="e-val" style="color:var(--green)">4f8d2a1c...</div>
       </div>
     </div>
 
-    <div class="cards-grid" style="margin-top:2rem;">
+    <div class="cards-grid" style="margin-top:1.75rem;">
       <div class="card">
         <span class="card-icon">🔑</span>
-        <h3>AES-256 — Le chiffrement militaire</h3>
-        <p>AES-256 est le standard utilisé par les gouvernements et l'armée mondiale. Pour le briser, il faudrait un ordinateur plus puissant que tout ce qui existe, pendant plus longtemps que l'âge de l'univers. <strong style="color:var(--green)">Impossible en pratique.</strong></p>
+        <h3>AES-256 : le chiffrement militaire</h3>
+        <p>Standard utilisé par les armées et gouvernements du monde entier. Pour le briser, il faudrait plus longtemps que l'âge de l'univers. <strong style="color:var(--green)">Impossible en pratique.</strong></p>
       </div>
       <div class="card">
         <span class="card-icon">🏗️</span>
         <h3>Architecture "Zéro connaissance"</h3>
-        <p>1Password (l'entreprise) <strong style="color:var(--accent2)">ne peut PAS lire vos mots de passe</strong>. Même si leurs serveurs sont piratés, les hackers ne verront que du charabia chiffré. La clé ne quitte jamais votre appareil.</p>
+        <p>1Password (l'entreprise) <strong style="color:var(--accent2)">ne peut pas lire vos mots de passe.</strong> Même si leurs serveurs sont piratés, les hackers ne verront que du charabia chiffré.</p>
       </div>
       <div class="card">
         <span class="card-icon">🌊</span>
-        <h3>Sel cryptographique</h3>
-        <p>Même si deux personnes ont le même mot de passe "1234", leurs données chiffrées seront <strong>complètement différentes</strong> grâce au "sel" — un nombre aléatoire unique ajouté à chaque chiffrement.</p>
+        <h3>Le sel cryptographique</h3>
+        <p>Même si deux personnes ont le même mot de passe "1234", leurs données chiffrées sont <strong>complètement différentes</strong> grâce à un nombre aléatoire unique ajouté à chaque chiffrement.</p>
       </div>
       <div class="card">
         <span class="card-icon">🔮</span>
-        <h3>La clé secrète unique</h3>
-        <p>En plus de votre mot de passe maître, 1Password vous donne une <strong style="color:var(--purple)">Clé Secrète</strong> de 34 caractères générée sur votre appareil. Personne d'autre ne la connaît. Les deux sont nécessaires pour accéder.</p>
+        <h3>La Clé Secrète unique</h3>
+        <p>En plus de votre mot de passe maître, 1Password vous donne une <strong style="color:var(--purple)">Clé Secrète</strong> de 34 caractères générée sur votre appareil. Personne d'autre ne la connaît.</p>
       </div>
     </div>
 
-    <!-- Deep dive chiffrement -->
-    <div style="margin-top:3rem;">
-      <h3 style="font-family:'Syne',sans-serif; font-weight:700; margin-bottom:1.5rem; font-size:1.3rem;">🎓 Pour ceux qui veulent vraiment comprendre</h3>
+    <div style="margin-top:2.5rem;">
+      <h3 style="font-family:'Outfit',sans-serif;font-weight:700;margin-bottom:1.25rem;font-size:1.15rem;">Pour ceux qui veulent vraiment comprendre</h3>
 
       <div class="feature-row">
         <div>
           <div class="timeline">
             <div class="timeline-item">
-              <h4>1. Vous créez votre compte</h4>
-              <p>1Password génère une Clé Secrète unique sur <strong>votre appareil</strong>. Elle n'est jamais transmise à leurs serveurs. Si vous la perdez, personne ne peut vous aider à récupérer votre compte.</p>
+              <h4>Vous créez votre compte</h4>
+              <p>1Password génère une Clé Secrète unique sur <strong>votre appareil.</strong> Elle ne quitte jamais votre appareil. Si vous la perdez, personne ne peut vous aider à récupérer votre compte.</p>
             </div>
             <div class="timeline-item">
-              <h4>2. Votre mot de passe maître est "haché"</h4>
-              <p>Via l'algorithme PBKDF2 (131 072 itérations), votre mot de passe maître devient une "empreinte" unique, de longueur fixe. Ce calcul est volontairement <strong>très lent</strong> pour décourager les hackers.</p>
+              <h4>Votre mot de passe maître est "haché"</h4>
+              <p>Via l'algorithme PBKDF2 (131 072 itérations), votre mot de passe devient une empreinte unique. Ce calcul est volontairement <strong>très lent</strong> pour décourager les hackers.</p>
             </div>
             <div class="timeline-item">
-              <h4>3. Génération de la clé AES</h4>
-              <p>L'empreinte + votre Clé Secrète sont combinées pour créer une clé AES-256 unique. C'est cette clé qui chiffre/déchiffre vos données.</p>
+              <h4>Génération de la clé AES</h4>
+              <p>L'empreinte + votre Clé Secrète sont combinées pour créer une clé AES-256 unique. C'est cette clé qui chiffre et déchiffre vos données.</p>
             </div>
             <div class="timeline-item">
-              <h4>4. Chiffrement de votre coffre</h4>
-              <p>Chaque entrée de votre coffre est chiffrée individuellement avec AES-256 en mode GCM (qui garantit aussi l'intégrité des données).</p>
+              <h4>Chiffrement de votre coffre</h4>
+              <p>Chaque entrée de votre coffre est chiffrée individuellement avec AES-256 en mode GCM, qui garantit aussi l'intégrité des données.</p>
             </div>
             <div class="timeline-item">
-              <h4>5. Stockage sur les serveurs</h4>
+              <h4>Stockage sur les serveurs</h4>
               <p>Seul le <strong>texte chiffré</strong> est envoyé aux serveurs 1Password. Jamais les données en clair, jamais votre mot de passe maître, jamais votre Clé Secrète.</p>
             </div>
           </div>
         </div>
-
         <div>
           <div class="terminal">
             <div class="terminal-bar">
-              <div class="t-dot red"></div>
-              <div class="t-dot yellow"></div>
-              <div class="t-dot green"></div>
-              <span style="font-size:0.8rem; color:var(--text3); margin-left:8px;">Ce que voient les serveurs 1Password</span>
+              <div class="t-dot red"></div><div class="t-dot yellow"></div><div class="t-dot green"></div>
+              <span style="font-size:0.72rem;color:var(--text3);margin-left:8px;">Ce que voient les serveurs 1Password</span>
             </div>
             <div class="terminal-body">
 <span class="t-comment">// Ce que VOUS voyez dans 1Password</span>
-<span class="t-key">Site</span>    : <span class="t-val">amazon.fr</span>
-<span class="t-key">Login</span>   : <span class="t-val">jean@dupont.fr</span>
-<span class="t-key">Mot de</span>  
-<span class="t-key">passe</span>   : <span class="t-val">K#9mP!vQ2rXw</span>
+<span class="t-key">Site </span>  : <span class="t-val">amazon.fr</span>
+<span class="t-key">Login</span>  : <span class="t-val">jean@dupont.fr</span>
+<span class="t-key">Mdp  </span>  : <span class="t-val">K#9mP!vQ2rXw</span>
 
-<span class="t-comment">// Ce que les serveurs 1Password stockent</span>
-<span class="t-key">uuid</span>    : <span class="t-purple">7f3a92b1-4e8d</span>
-<span class="t-key">data</span>    : <span class="t-red">U2FsdGVkX1+mK9pQ7yRa</span>
-           <span class="t-red">3xNw8vBhJzLc2eHi4oYt</span>
-           <span class="t-red">f5DgAuMrCkVsWbPnXqZp</span>
-<span class="t-key">iv</span>      : <span class="t-orange">8b4f2a1e9c3d7f5b</span>
-<span class="t-key">tag</span>     : <span class="t-orange">a3e7c1d9f5b2e8a4</span>
+<span class="t-comment">// Ce que les serveurs stockent</span>
+<span class="t-key">uuid </span>  : <span class="t-purple">7f3a92b1-4e8d</span>
+<span class="t-key">data </span>  : <span class="t-red">U2FsdGVkX1+mK9pQ7yRa</span>
+         <span class="t-red">3xNw8vBhJzLc2eHi4oYt</span>
+         <span class="t-red">f5DgAuMrCkVsWbPnXqZp</span>
+<span class="t-key">iv   </span>  : <span class="t-orange">8b4f2a1e9c3d7f5b</span>
+<span class="t-key">tag  </span>  : <span class="t-orange">a3e7c1d9f5b2e8a4</span>
 
 <span class="t-comment">// Même un employé de 1Password</span>
-<span class="t-comment">// ne peut pas lire ça ✓</span>
+<span class="t-comment">// ne peut pas déchiffrer ça.</span>
             </div>
           </div>
 
-          <div class="highlight-box" style="margin-top:1.5rem;">
-            <h4 style="font-weight:600; margin-bottom:0.5rem;">💡 En résumé très simple</h4>
-            <p style="color:var(--text2); font-size:0.92rem;">Imaginez que vous écrivez votre mot de passe en français, et qu'une machine le traduit dans une langue inventée que seule votre clé secrète peut comprendre. Même si quelqu'un vole la traduction, sans la clé, c'est du charabia incompréhensible.</p>
+          <div class="highlight-box" style="margin-top:1.25rem;">
+            <p style="color:var(--text2);font-size:0.86rem;line-height:1.7;">
+              <strong style="color:var(--text);">En résumé très simple :</strong> imaginez que vous écrivez en français, et qu'une machine le traduit dans une langue inventée que seule votre clé peut comprendre. Même si quelqu'un vole la traduction, sans la clé, c'est du charabia.
+            </p>
           </div>
         </div>
       </div>
@@ -1597,81 +1277,66 @@
 <section class="section-alt" id="mfa" class="section-anchor">
   <div class="container">
     <span class="section-label">🔐 Double protection</span>
-    <h2 class="section-title">Le MFA, c'est quoi et pourquoi ça vous est demandé ?</h2>
-    <p class="section-desc">MFA = Multi-Factor Authentication = Authentification à Multiple Facteurs. C'est une deuxième serrure sur votre coffre-fort.</p>
+    <h2 class="section-title">Le MFA, c'est quoi ?</h2>
+    <p class="section-desc">MFA = Multi-Factor Authentication = Authentification à plusieurs facteurs. C'est une deuxième serrure sur votre coffre-fort.</p>
 
     <div class="warning-box">
       <div class="warning-icon">❓</div>
       <div class="warning-content">
-        <h4>Pourquoi 1Password me demande-t-il une application supplémentaire lors de l'inscription ?</h4>
-        <p>Parce que même si un hacker connaît votre mot de passe maître, il lui manquera toujours la <strong>deuxième preuve d'identité</strong>. Un mot de passe seul n'est plus suffisant en 2026.</p>
+        <h4>Pourquoi 1Password me demande une appli supplémentaire lors de l'inscription ?</h4>
+        <p>Parce que même si un hacker connaît votre mot de passe maître, il lui manquera toujours la <strong>deuxième preuve d'identité.</strong> Un mot de passe seul n'est plus suffisant en 2026.</p>
       </div>
     </div>
 
     <div class="info-box">
-      <div class="info-icon">🚪</div>
+      <div class="info-icon">🏧</div>
       <div class="info-content">
-        <h4>L'analogie de la banque</h4>
-        <p>Quand vous retirez de l'argent au distributeur, il vous faut <strong>deux choses</strong> : votre carte bancaire (ce que vous avez) ET votre code PIN (ce que vous savez). Le MFA applique le même principe à 1Password. Un seul élément volé ne suffit pas.</p>
+        <h4>L'analogie du distributeur de billets</h4>
+        <p>Pour retirer de l'argent, il vous faut <strong>deux choses :</strong> votre carte bancaire (ce que vous avez) ET votre code PIN (ce que vous savez). Le MFA applique le même principe. Un seul élément volé ne suffit pas.</p>
       </div>
     </div>
 
-    <!-- 3 factors -->
-    <h3 style="font-family:'Syne',sans-serif; font-weight:700; margin:2rem 0 1rem; font-size:1.2rem;">Les 3 types de facteurs d'authentification</h3>
+    <h3 style="font-family:'Outfit',sans-serif;font-weight:700;margin:1.75rem 0 0.9rem;font-size:1.05rem;">Les 3 types de facteurs d'authentification</h3>
 
     <div class="mfa-visual">
       <div class="mfa-factor active">
         <span class="mfa-icon">🧠</span>
         <div class="mfa-name">Ce que vous SAVEZ</div>
         <div class="mfa-desc">Votre mot de passe maître, un code PIN, une question secrète</div>
-        <div class="tag tag-blue" style="margin-top:0.75rem; display:inline-block;">Facteur 1</div>
+        <div class="tag tag-blue" style="margin-top:0.75rem;display:inline-block;">Facteur 1</div>
       </div>
       <div class="mfa-factor active">
         <span class="mfa-icon">📱</span>
         <div class="mfa-name">Ce que vous AVEZ</div>
-        <div class="mfa-desc">Votre téléphone avec l'appli d'authentification (Google/Microsoft Authenticator)</div>
-        <div class="tag tag-green" style="margin-top:0.75rem; display:inline-block;">Facteur 2</div>
+        <div class="mfa-desc">Votre téléphone avec l'appli d'authentification (Google ou Microsoft Authenticator)</div>
+        <div class="tag tag-green" style="margin-top:0.75rem;display:inline-block;">Facteur 2</div>
       </div>
       <div class="mfa-factor">
         <span class="mfa-icon">👆</span>
         <div class="mfa-name">Ce que vous ÊTES</div>
         <div class="mfa-desc">Empreinte digitale, reconnaissance faciale, scan de la rétine</div>
-        <div class="tag tag-purple" style="margin-top:0.75rem; display:inline-block;">Facteur 3</div>
+        <div class="tag" style="background:rgba(192,132,252,0.12);color:var(--purple);margin-top:0.75rem;display:inline-block;">Facteur 3</div>
       </div>
     </div>
 
-    <h3 style="font-family:'Syne',sans-serif; font-weight:700; margin:2.5rem 0 1rem; font-size:1.2rem;">⏱️ Comment fonctionne le code TOTP (le code à 6 chiffres) ?</h3>
+    <h3 style="font-family:'Outfit',sans-serif;font-weight:700;margin:2rem 0 0.9rem;font-size:1.05rem;">Comment fonctionne le code à 6 chiffres ?</h3>
 
     <div class="feature-row">
       <div>
-        <p style="color:var(--text2); margin-bottom:1.5rem; font-size:0.95rem;">
-          Ce petit code de 6 chiffres qui change toutes les 30 secondes semble mystérieux. En réalité, c'est très simple :
-        </p>
+        <p style="color:var(--text2);margin-bottom:1.25rem;font-size:0.88rem;line-height:1.7;">Ce petit code qui change toutes les 30 secondes semble mystérieux. En réalité, c'est très simple :</p>
 
         <ul class="num-list">
-          <li>
-            <div class="num-badge">1</div>
-            <div class="num-text"><strong>Lors de l'inscription</strong>, 1Password et votre téléphone se "mettent d'accord" sur un nombre secret commun (la seed) — une seule fois.</div>
-          </li>
-          <li>
-            <div class="num-badge">2</div>
-            <div class="num-text"><strong>Chaque 30 secondes</strong>, votre téléphone et les serveurs de 1Password calculent indépendamment le même code à partir de ce nombre + l'heure actuelle.</div>
-          </li>
-          <li>
-            <div class="num-badge">3</div>
-            <div class="num-text"><strong>Quand vous tapez le code</strong>, les serveurs vérifient qu'il correspond à leur calcul. Si oui : vous êtes authentifié.</div>
-          </li>
-          <li>
-            <div class="num-badge">4</div>
-            <div class="num-text"><strong>Même si un hacker voit le code</strong>, il n'a que 30 secondes pour l'utiliser, et sans votre téléphone, il ne peut pas calculer le suivant.</div>
-          </li>
+          <li><div class="num-badge">1</div><div class="num-text"><strong>Lors de l'inscription,</strong> 1Password et votre téléphone se mettent d'accord sur un nombre secret commun (la seed), une seule fois.</div></li>
+          <li><div class="num-badge">2</div><div class="num-text"><strong>Toutes les 30 secondes,</strong> votre téléphone et les serveurs 1Password calculent indépendamment le même code à partir de ce nombre + l'heure actuelle.</div></li>
+          <li><div class="num-badge">3</div><div class="num-text"><strong>Quand vous tapez le code,</strong> les serveurs vérifient qu'il correspond à leur calcul. Si oui : vous êtes authentifié.</div></li>
+          <li><div class="num-badge">4</div><div class="num-text"><strong>Même si un hacker voit le code,</strong> il n'a que 30 secondes pour l'utiliser. Sans votre téléphone, il ne peut pas calculer le suivant.</div></li>
         </ul>
 
-        <div class="success-box" style="margin-top:1.5rem;">
+        <div class="success-box" style="margin-top:1.25rem;">
           <div class="success-icon">🛡️</div>
           <div class="success-content">
             <h4>Pourquoi c'est si efficace</h4>
-            <p>Un hacker qui vole votre mot de passe maître sera bloqué. Sans votre téléphone physique, impossible d'accéder au compte. Et si on vous vole votre téléphone sans connaître le mot de passe maître, même blocage !</p>
+            <p>Un hacker qui vole votre mot de passe maître sera bloqué. Sans votre téléphone, impossible d'accéder au compte. Et l'inverse : si on vole votre téléphone sans le mot de passe maître, même blocage.</p>
           </div>
         </div>
       </div>
@@ -1679,90 +1344,58 @@
       <div>
         <div class="terminal">
           <div class="terminal-bar">
-            <div class="t-dot red"></div>
-            <div class="t-dot yellow"></div>
-            <div class="t-dot green"></div>
-            <span style="font-size:0.8rem; color:var(--text3); margin-left:8px;">Simulation TOTP — Logique simplifiée</span>
+            <div class="t-dot red"></div><div class="t-dot yellow"></div><div class="t-dot green"></div>
+            <span style="font-size:0.72rem;color:var(--text3);margin-left:8px;">Logique TOTP simplifiée</span>
           </div>
           <div class="terminal-body">
-<span class="t-comment">// Seed partagée (jamais transmise à nouveau)</span>
+<span class="t-comment">// Seed partagée (une seule fois)</span>
 <span class="t-key">SEED</span> = <span class="t-val">"JBSWY3DPEHPK3PXP"</span>
 
-<span class="t-comment">// Calcul du code toutes les 30s</span>
-<span class="t-key">temps_actuel</span>    = <span class="t-orange">14h32m15s</span>
-<span class="t-key">fenêtre_30s</span>     = <span class="t-orange">floor(temps / 30)</span>
-                 = <span class="t-orange">173,147</span>
+<span class="t-comment">// Calcul toutes les 30s</span>
+<span class="t-key">fenêtre</span> = <span class="t-orange">floor(temps / 30)</span>
+         = <span class="t-orange">173 147</span>
 
-<span class="t-comment">// HMAC-SHA1 du seed + fenêtre</span>
-<span class="t-key">hmac</span> = <span class="t-purple">HMAC(SEED, 173147)</span>
-     = <span class="t-red">1f86a3c9d2e...</span>
+<span class="t-comment">// HMAC-SHA1(seed + fenêtre)</span>
+<span class="t-key">hmac</span> = <span class="t-red">1f86a3c9d2e...</span>
 
-<span class="t-comment">// Extraction des 6 derniers chiffres</span>
 <span class="t-key">code</span> = <span class="t-green">741 832</span>
 
-<span class="t-comment">// 30 secondes plus tard :</span>
-<span class="t-key">code</span> = <span class="t-green">293 514</span> <span class="t-comment">← différent !</span>
+<span class="t-comment">// 30 secondes plus tard</span>
+<span class="t-key">code</span> = <span class="t-green">293 514</span>
           </div>
         </div>
 
-        <!-- Timer visual -->
-        <div class="card" style="margin-top:1rem; text-align:center;">
-          <div style="font-size:0.8rem; color:var(--text3); margin-bottom:0.5rem; text-transform:uppercase; letter-spacing:1px;">Votre code actuel (simulé)</div>
-          <div id="totpCode" style="font-family:'JetBrains Mono',monospace; font-size:2.5rem; font-weight:700; color:var(--accent2); letter-spacing:8px;">— — —</div>
-          <div style="margin-top:1rem; height:6px; background:var(--bg); border-radius:3px; overflow:hidden;">
-            <div id="totpBar" style="height:100%; background:var(--accent); border-radius:3px; transition:width 1s linear;"></div>
+        <div class="card" style="margin-top:1rem;text-align:center;padding:1.25rem;">
+          <div style="font-size:0.68rem;color:var(--text3);margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;">Code actuel (simulé)</div>
+          <div id="totpCode">--- ---</div>
+          <div style="margin-top:0.9rem;height:4px;background:var(--bg);border-radius:4px;overflow:hidden;">
+            <div id="totpBar" style="height:100%;background:var(--accent);border-radius:4px;transition:width 1s linear;"></div>
           </div>
-          <div id="totpTimer" style="font-size:0.8rem; color:var(--text3); margin-top:0.5rem;">Renouvellement dans — s</div>
+          <div id="totpTimer" style="font-size:0.75rem;color:var(--text3);margin-top:0.5rem;">Renouvellement dans... s</div>
         </div>
       </div>
     </div>
 
-    <!-- Procédure MFA -->
-    <h3 style="font-family:'Syne',sans-serif; font-weight:700; margin:2.5rem 0 1rem; font-size:1.2rem;">📱 Procédure : Activer le MFA sur 1Password</h3>
+    <h3 style="font-family:'Outfit',sans-serif;font-weight:700;margin:2.5rem 0 1rem;font-size:1.05rem;">📱 Procédure : Activer le MFA sur 1Password</h3>
 
     <div class="steps">
-      <div class="step">
-        <div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div>
-        <div class="step-content">
-          <h3>Téléchargez une application d'authentification</h3>
-          <p>Sur votre téléphone, allez sur l'App Store (iPhone) ou le Play Store (Android). Cherchez <strong>"Microsoft Authenticator"</strong> ou <strong>"Google Authenticator"</strong>. Installez-en une. Elles sont gratuites.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div>
-        <div class="step-content">
-          <h3>Connectez-vous à 1Password sur le web</h3>
-          <p>Allez sur <code>1password.com</code>, connectez-vous avec votre email et votre mot de passe maître.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div>
-        <div class="step-content">
-          <h3>Accédez aux paramètres de sécurité</h3>
-          <p>Cliquez sur votre avatar (en haut à droite) → <strong>Mon profil</strong> → <strong>Authentification à deux facteurs</strong> → <strong>Configurer l'application</strong>.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-left"><div class="step-num">4</div><div class="step-line"></div></div>
-        <div class="step-content">
-          <h3>Scannez le QR Code</h3>
-          <p>Un grand QR Code s'affiche à l'écran. Ouvrez votre application d'authentification, appuyez sur le <strong>"+"</strong> et scannez ce QR Code avec la caméra de votre téléphone. L'application commence alors à générer des codes.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-left"><div class="step-num">5</div><div class="step-line"></div></div>
-        <div class="step-content">
-          <h3>Entrez le code de confirmation</h3>
-          <p>Tapez le code à 6 chiffres affiché sur votre téléphone dans le champ prévu sur le site 1Password. Cliquez <strong>Valider</strong>. C'est terminé !</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-left"><div class="step-num">6</div><div class="step-line"></div></div>
-        <div class="step-content">
-          <h3>Sauvegardez vos codes de récupération</h3>
-          <p>1Password vous donnera des <strong>codes de secours</strong> à usage unique. Imprimez-les ou notez-les et rangez-les dans un endroit sûr (pas sur votre ordinateur). Si vous perdez votre téléphone, ces codes vous sauveront.</p>
-        </div>
-      </div>
+      <div class="step"><div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div>
+      <div class="step-content"><h3>Téléchargez une application d'authentification</h3><p>Sur votre téléphone, cherchez <strong>"Microsoft Authenticator"</strong> ou <strong>"Google Authenticator"</strong> sur l'App Store ou le Play Store. Installez-en une. Elles sont gratuites.</p></div></div>
+
+      <div class="step"><div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div>
+      <div class="step-content"><h3>Connectez-vous à 1Password sur le web</h3><p>Allez sur <code>1password.com</code>, connectez-vous avec votre email et votre mot de passe maître.</p></div></div>
+
+      <div class="step"><div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div>
+      <div class="step-content"><h3>Accédez aux paramètres de sécurité</h3><p>Cliquez sur votre avatar (en haut à droite) puis <strong>Mon profil</strong> puis <strong>Authentification à deux facteurs</strong> puis <strong>Configurer l'application.</strong></p></div></div>
+
+      <div class="step"><div class="step-left"><div class="step-num">4</div><div class="step-line"></div></div>
+      <div class="step-content"><h3>Scannez le QR Code</h3><p>Un grand QR Code s'affiche. Ouvrez votre application d'authentification, appuyez sur <strong>"+"</strong> et scannez ce QR Code. L'appli commence à générer des codes.</p></div></div>
+
+      <div class="step"><div class="step-left"><div class="step-num">5</div><div class="step-line"></div></div>
+      <div class="step-content"><h3>Entrez le code de confirmation</h3><p>Tapez le code à 6 chiffres affiché sur votre téléphone dans le champ prévu. Cliquez <strong>Valider.</strong> C'est terminé.</p></div></div>
+
+      <div class="step"><div class="step-left"><div class="step-num">6</div><div class="step-line"></div></div>
+      <div class="step-content"><h3>Sauvegardez vos codes de récupération</h3><p>1Password vous donnera des <strong>codes de secours</strong> à usage unique. Imprimez-les et rangez-les en lieu sûr. Si vous perdez votre téléphone, ces codes vous sauveront.</p></div></div>
     </div>
   </div>
 </section>
@@ -1773,173 +1406,81 @@
 <section id="coffres" class="section-anchor">
   <div class="container">
     <span class="section-label">🗄️ Organisation</span>
-    <h2 class="section-title">Les coffres-forts — Comment s'organiser</h2>
+    <h2 class="section-title">Les coffres-forts</h2>
     <p class="section-desc">Un coffre = un espace séparé. Comme plusieurs tiroirs dans votre bureau, chacun fermé à sa propre clé.</p>
 
-    <!-- Coffre Employé -->
-    <div class="highlight-box green" style="margin-bottom:2rem;">
-      <div style="display:flex; align-items:flex-start; gap:1rem; flex-wrap:wrap;">
-        <span style="font-size:2rem;">🔒</span>
+    <div class="highlight-box green" style="margin-bottom:1.75rem;">
+      <div style="display:flex;align-items:flex-start;gap:1rem;flex-wrap:wrap;">
+        <span style="font-size:1.75rem;flex-shrink:0;">🔒</span>
         <div>
-          <h3 style="font-family:'Syne',sans-serif; font-weight:700; font-size:1.2rem; margin-bottom:0.5rem;">Le coffre "Employé" — Votre coffre privé</h3>
-          <p style="color:var(--text2); font-size:0.95rem; margin-bottom:1rem;">
-            Dès que votre compte est créé par l'entreprise, un coffre nommé <strong>"Employé"</strong> (ou votre prénom, peu importe) vous est attribué automatiquement. C'est votre espace <strong>100% privé</strong>.
-          </p>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:1.05rem;margin-bottom:0.5rem;">Le coffre "Employé" : votre espace 100% privé</h3>
+          <p style="color:var(--text2);font-size:0.86rem;margin-bottom:1rem;">Dès que votre compte est créé par l'entreprise, un coffre nommé <strong>"Employé"</strong> vous est attribué automatiquement. Personne d'autre ne peut y accéder.</p>
           <ul class="num-list" style="margin:0;">
-            <li><div class="num-badge" style="background:var(--green)">✓</div><div class="num-text"><strong>Personne d'autre ne peut y accéder</strong> — Ni votre responsable, ni l'IT, ni 1Password. Personne.</div></li>
-            <li><div class="num-badge" style="background:var(--green)">✓</div><div class="num-text"><strong>Mettez-y ce que vous voulez</strong> — Mots de passe perso, cartes bancaires, informations sensibles.</div></li>
-            <li><div class="num-badge" style="background:var(--green)">✓</div><div class="num-text"><strong>Il vous appartient</strong> — Si vous quittez l'entreprise, vous pouvez exporter son contenu.</div></li>
+            <li><div class="num-badge" style="background:var(--green);color:#000">✓</div><div class="num-text"><strong>Ni votre responsable, ni l'IT, ni 1Password.</strong> Personne ne peut lire ce coffre.</div></li>
+            <li><div class="num-badge" style="background:var(--green);color:#000">✓</div><div class="num-text"><strong>Mettez-y ce que vous voulez.</strong> Mots de passe perso, cartes bancaires, informations sensibles.</div></li>
+            <li><div class="num-badge" style="background:var(--green);color:#000">✓</div><div class="num-text"><strong>Il vous appartient.</strong> Si vous quittez l'entreprise, vous pouvez en exporter le contenu.</div></li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- Visual Vault Layout -->
     <div class="vault-layout">
       <div class="vault-sidebar">
         <h4>Mes coffres</h4>
-        <div class="vault-item active">
-          <div class="vault-dot" style="background:var(--green)"></div>
-          <span>🔒 Employé (privé)</span>
-        </div>
-        <div class="vault-item">
-          <div class="vault-dot" style="background:var(--accent)"></div>
-          <span>👥 Équipe Production</span>
-        </div>
-        <div class="vault-item">
-          <div class="vault-dot" style="background:var(--purple)"></div>
-          <span>👨‍👩‍👧 Famille</span>
-        </div>
-        <div class="vault-item">
-          <div class="vault-dot" style="background:var(--orange)"></div>
-          <span>🏢 Direction</span>
-        </div>
-        <div style="margin-top:1rem; padding-top:1rem; border-top:1px solid var(--border);">
+        <div class="vault-item active"><div class="vault-dot" style="background:var(--green)"></div><span>🔒 Employé (privé)</span></div>
+        <div class="vault-item"><div class="vault-dot" style="background:var(--accent)"></div><span>👥 Équipe Production</span></div>
+        <div class="vault-item"><div class="vault-dot" style="background:var(--purple)"></div><span>👨‍👩‍👧 Famille</span></div>
+        <div class="vault-item"><div class="vault-dot" style="background:var(--orange)"></div><span>🏢 Direction</span></div>
+        <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);">
           <h4>Légende</h4>
-          <div style="font-size:0.78rem; color:var(--text3); margin-top:0.5rem;">
-            <div>🟢 Privé — Vous seul</div>
-            <div>🔵 Partagé — Votre équipe</div>
-            <div>🟣 Famille — Votre famille</div>
+          <div style="font-size:0.72rem;color:var(--text3);margin-top:0.4rem;line-height:1.8;">
+            <div>🟢 Privé &mdash; Vous seul</div>
+            <div>🔵 Partagé &mdash; Votre équipe</div>
+            <div>🟣 Famille</div>
           </div>
         </div>
       </div>
       <div class="vault-main">
-        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
-          <h4>Coffre "Employé" — Mon espace privé</h4>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.9rem;flex-wrap:wrap;gap:0.5rem;">
+          <h4>Mon espace privé</h4>
           <span class="vault-badge badge-private">🔒 Privé</span>
         </div>
-        <div class="vault-entry">
-          <div class="entry-logo">📧</div>
-          <div class="entry-info">
-            <div class="entry-name">Messagerie pro</div>
-            <div class="entry-user">jean.dupont@monentreprise.fr</div>
-          </div>
-          <div class="entry-pwd">••••••••••••</div>
-        </div>
-        <div class="vault-entry">
-          <div class="entry-logo">💳</div>
-          <div class="entry-info">
-            <div class="entry-name">Carte bancaire perso</div>
-            <div class="entry-user">Visa se terminant par 4521</div>
-          </div>
-          <div class="entry-pwd">••••</div>
-        </div>
-        <div class="vault-entry">
-          <div class="entry-logo">🏦</div>
-          <div class="entry-info">
-            <div class="entry-name">Espace retraite AGIRC</div>
-            <div class="entry-user">jean.dupont@email.fr</div>
-          </div>
-          <div class="entry-pwd">••••••••••••</div>
-        </div>
-        <div class="vault-entry">
-          <div class="entry-logo">🛒</div>
-          <div class="entry-info">
-            <div class="entry-name">Amazon personnel</div>
-            <div class="entry-user">jean.dupont@gmail.com</div>
-          </div>
-          <div class="entry-pwd">••••••••••••</div>
-        </div>
-        <div style="margin-top:1rem; font-size:0.8rem; color:var(--text3);">
-          ℹ️ Aucun de ces mots de passe n'est visible par votre entreprise
-        </div>
+        <div class="vault-entry"><div class="entry-logo">📧</div><div class="entry-info"><div class="entry-name">Messagerie pro</div><div class="entry-user">jean.dupont@monentreprise.fr</div></div><div class="entry-pwd">••••••••</div></div>
+        <div class="vault-entry"><div class="entry-logo">💳</div><div class="entry-info"><div class="entry-name">Carte bancaire perso</div><div class="entry-user">Visa ••• 4521</div></div><div class="entry-pwd">••••</div></div>
+        <div class="vault-entry"><div class="entry-logo">🏦</div><div class="entry-info"><div class="entry-name">Espace retraite AGIRC</div><div class="entry-user">jean.dupont@email.fr</div></div><div class="entry-pwd">••••••••</div></div>
+        <div class="vault-entry"><div class="entry-logo">🛒</div><div class="entry-info"><div class="entry-name">Amazon personnel</div><div class="entry-user">jean.dupont@gmail.com</div></div><div class="entry-pwd">••••••••</div></div>
+        <div style="margin-top:0.9rem;font-size:0.74rem;color:var(--text3);">ℹ️ Aucun de ces mots de passe n'est visible par votre entreprise</div>
       </div>
     </div>
 
-    <!-- Coffres partagés -->
-    <h3 style="font-family:'Syne',sans-serif; font-weight:700; margin:3rem 0 1rem; font-size:1.3rem;">👥 Les coffres partagés — Travail en équipe</h3>
-
-    <p style="color:var(--text2); margin-bottom:1.5rem; font-size:0.95rem;">En plus de votre coffre privé, vous pouvez être <strong>invité à des coffres partagés</strong> par votre équipe ou votre administrateur IT. Ces coffres permettent à plusieurs personnes d'accéder aux mêmes identifiants.</p>
+    <h3 style="font-family:'Outfit',sans-serif;font-weight:700;margin:2.5rem 0 0.9rem;font-size:1.1rem;">👥 Les coffres partagés</h3>
+    <p style="color:var(--text2);margin-bottom:1.25rem;font-size:0.88rem;line-height:1.7;">En plus de votre coffre privé, vous pouvez être <strong>invité à des coffres partagés</strong> par votre équipe ou votre administrateur IT. Plusieurs personnes accèdent alors aux mêmes identifiants.</p>
 
     <div class="cards-grid">
-      <div class="card">
-        <span class="card-icon">🤝</span>
-        <h3>Invitations par l'IT</h3>
-        <p>Votre département informatique vous invites dans les coffres dont vous avez besoin selon votre poste. Vous recevrez une notification dans 1Password.</p>
-      </div>
-      <div class="card">
-        <span class="card-icon">🔄</span>
-        <h3>Synchronisation en temps réel</h3>
-        <p>Si un collègue met à jour un mot de passe dans un coffre partagé, vous voyez la mise à jour immédiatement. Plus de "quel est le nouveau mot de passe de la MES ?"</p>
-      </div>
-      <div class="card">
-        <span class="card-icon">👀</span>
-        <h3>Contrôle des accès</h3>
-        <p>L'administrateur contrôle qui voit quoi. Vous pouvez avoir accès en lecture seulement (voir mais pas modifier) ou en modification totale.</p>
-      </div>
+      <div class="card"><span class="card-icon">🤝</span><h3>Invitations par l'IT</h3><p>L'informatique vous invite dans les coffres dont vous avez besoin selon votre poste. Vous recevrez une notification dans 1Password.</p></div>
+      <div class="card"><span class="card-icon">🔄</span><h3>Synchronisation en temps réel</h3><p>Si un collègue met à jour un mot de passe dans un coffre partagé, vous voyez la mise à jour immédiatement. Fini les "c'est quoi le nouveau mot de passe ?"</p></div>
+      <div class="card"><span class="card-icon">👀</span><h3>Contrôle des accès</h3><p>L'administrateur contrôle qui voit quoi. Accès en lecture seule ou en modification totale selon votre rôle.</p></div>
     </div>
 
-    <!-- Coffre Famille -->
-    <div class="highlight-box" style="margin:2rem 0; background: linear-gradient(135deg, rgba(168,85,247,0.1), rgba(168,85,247,0.05)); border-color:rgba(168,85,247,0.3);">
-      <div style="display:flex; gap:1rem; align-items:flex-start; flex-wrap:wrap;">
-        <span style="font-size:2rem;">👨‍👩‍👧‍👦</span>
+    <div class="highlight-box" style="margin:1.75rem 0;background:rgba(192,132,252,0.05);border-color:rgba(192,132,252,0.18);">
+      <div style="display:flex;gap:1rem;align-items:flex-start;flex-wrap:wrap;">
+        <span style="font-size:1.75rem;flex-shrink:0;">👨‍👩‍👧‍👦</span>
         <div>
-          <h3 style="font-family:'Syne',sans-serif; font-weight:700; margin-bottom:0.75rem;">Créer un coffre "Famille"</h3>
-          <p style="color:var(--text2); font-size:0.95rem; margin-bottom:1rem;">1Password Families vous permet de créer un compte partagé avec votre famille (jusqu'à 5 membres). Chacun garde son coffre privé, et vous partagez un coffre commun pour la famille.</p>
-          <p style="color:var(--text2); font-size:0.95rem;"><strong style="color:var(--purple);">Idéal pour :</strong> les abonnements Netflix/Disney+, les comptes Amazon famille, les identifiants de la banque commune, le coffre de la maison de vacances...</p>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;margin-bottom:0.6rem;font-size:1rem;">Un coffre "Famille"</h3>
+          <p style="color:var(--text2);font-size:0.86rem;margin-bottom:0.75rem;">1Password Families vous permet de partager un compte avec votre famille (jusqu'à 5 membres). Chacun garde son coffre privé, et vous partagez un coffre commun.</p>
+          <p style="color:var(--text2);font-size:0.86rem;"><strong style="color:var(--purple);">Idéal pour :</strong> Netflix, Disney+, Amazon famille, la banque commune, la maison de vacances...</p>
         </div>
       </div>
     </div>
 
-    <!-- Procédure créer un coffre -->
-    <h3 style="font-family:'Syne',sans-serif; font-weight:700; margin:2.5rem 0 1rem; font-size:1.2rem;">📋 Procédure : Créer un nouveau coffre</h3>
+    <h3 style="font-family:'Outfit',sans-serif;font-weight:700;margin:2rem 0 1rem;font-size:1.05rem;">📋 Procédure : Créer un nouveau coffre</h3>
 
     <div class="steps">
-      <div class="step">
-        <div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div>
-        <div class="step-content">
-          <h3>Ouvrir 1Password</h3>
-          <p>Lancez l'application 1Password sur votre ordinateur ou dans votre navigateur. Déverrouillez-la avec votre mot de passe maître.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div>
-        <div class="step-content">
-          <h3>Accéder aux Coffres</h3>
-          <p>Dans la barre latérale gauche, cliquez sur <strong>"Coffres"</strong> (ou "Vaults" en anglais). Vous verrez la liste de vos coffres existants.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div>
-        <div class="step-content">
-          <h3>Créer un nouveau coffre</h3>
-          <p>Cliquez sur le bouton <strong>"+ Nouveau coffre"</strong> (ou l'icône "+"). Donnez-lui un nom clair : "Famille Dupont", "Vacances", "Abonnements"...</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-left"><div class="step-num">4</div><div class="step-line"></div></div>
-        <div class="step-content">
-          <h3>Personnaliser (optionnel)</h3>
-          <p>Choisissez une couleur et une icône pour retrouver facilement votre coffre. Cliquez <strong>"Créer le coffre"</strong>.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-left"><div class="step-num">5</div><div class="step-line"></div></div>
-        <div class="step-content">
-          <h3>Inviter des membres (si partagé)</h3>
-          <p>Si vous souhaitez partager ce coffre, accédez à ses <strong>Paramètres</strong> → <strong>Inviter des personnes</strong>. Entrez l'adresse email des membres de votre famille ou collègues. Ils recevront une invitation.</p>
-        </div>
-      </div>
+      <div class="step"><div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div><div class="step-content"><h3>Ouvrez 1Password</h3><p>Lancez l'application et déverrouillez-la avec votre mot de passe maître.</p></div></div>
+      <div class="step"><div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div><div class="step-content"><h3>Accédez aux Coffres</h3><p>Dans la barre latérale gauche, cliquez sur <strong>"Coffres"</strong> (ou "Vaults"). Vous verrez la liste de vos coffres existants.</p></div></div>
+      <div class="step"><div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div><div class="step-content"><h3>Créez un nouveau coffre</h3><p>Cliquez sur <strong>"+ Nouveau coffre"</strong>. Donnez-lui un nom clair : "Famille Dupont", "Vacances", "Abonnements"...</p></div></div>
+      <div class="step"><div class="step-left"><div class="step-num">4</div><div class="step-line"></div></div><div class="step-content"><h3>Personnalisez (optionnel)</h3><p>Choisissez une couleur et une icône pour le retrouver facilement. Cliquez <strong>"Créer le coffre".</strong></p></div></div>
+      <div class="step"><div class="step-left"><div class="step-num">5</div><div class="step-line"></div></div><div class="step-content"><h3>Invitez des membres (si partagé)</h3><p>Accédez aux <strong>Paramètres</strong> du coffre puis <strong>Inviter des personnes.</strong> Entrez l'adresse email des membres. Ils recevront une invitation par email.</p></div></div>
     </div>
   </div>
 </section>
@@ -1950,169 +1491,86 @@
 <section class="section-alt" id="procedures" class="section-anchor">
   <div class="container">
     <span class="section-label">📋 Mode d'emploi</span>
-    <h2 class="section-title">Les procédures essentielles, étape par étape</h2>
-    <p class="section-desc">Chaque opération courante dans 1Password, expliquée simplement avec des instructions précises.</p>
+    <h2 class="section-title">Les procédures essentielles</h2>
+    <p class="section-desc">Chaque opération courante dans 1Password, expliquée étape par étape.</p>
 
-    <!-- Onglets de procédures -->
-    <div class="proc-tabs" style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:2rem;">
-      <button class="proc-tab active" onclick="showProc('create-account')">Créer mon compte</button>
-      <button class="proc-tab" onclick="showProc('add-pwd')">Ajouter un mot de passe</button>
-      <button class="proc-tab" onclick="showProc('generate')">Générer un mot de passe</button>
-      <button class="proc-tab" onclick="showProc('first-login')">Première connexion</button>
-      <button class="proc-tab" onclick="showProc('mobile')">Sur téléphone</button>
+    <div class="proc-tabs">
+      <button class="proc-tab active" onclick="showProc('create-account',this)">Créer mon compte</button>
+      <button class="proc-tab" onclick="showProc('add-pwd',this)">Ajouter un mot de passe</button>
+      <button class="proc-tab" onclick="showProc('generate',this)">Générer un mot de passe</button>
+      <button class="proc-tab" onclick="showProc('first-login',this)">Nouvel appareil</button>
+      <button class="proc-tab" onclick="showProc('mobile',this)">Sur téléphone</button>
     </div>
-
-    <style>
-      .proc-tab {
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 10px;
-        padding: 8px 16px;
-        color: var(--text2);
-        font-family: 'DM Sans', sans-serif;
-        font-size: 0.85rem;
-        cursor: pointer;
-        transition: all 0.2s;
-      }
-      .proc-tab:hover { border-color: var(--border2); color: var(--text); }
-      .proc-tab.active {
-        background: var(--accent);
-        border-color: var(--accent);
-        color: #fff;
-      }
-      .proc-content { display: none; }
-      .proc-content.active { display: block; }
-    </style>
 
     <div id="proc-create-account" class="proc-content active">
       <div class="highlight-box">
-        <h3 style="font-family:'Syne',sans-serif; font-weight:700; margin-bottom:1rem;">🆕 Créer votre compte 1Password (invitation entreprise)</h3>
-        <p style="color:var(--text2); font-size:0.9rem; margin-bottom:1.5rem;">En général, votre service IT vous envoie un email d'invitation. Voici la procédure complète :</p>
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:700;margin-bottom:0.75rem;font-size:1rem;">Créer votre compte 1Password (invitation entreprise)</h3>
+        <p style="color:var(--text2);font-size:0.84rem;">Votre service IT vous envoie un email d'invitation. Voici la procédure complète.</p>
       </div>
       <div class="steps">
-        <div class="step"><div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div>
-        <div class="step-content"><h3>Ouvrez l'email d'invitation</h3><p>Cherchez un email de la part de <code>1password.com</code> dans votre boîte mail. Cliquez sur le bouton <strong>"Rejoindre l'équipe"</strong> ou <strong>"Accepter l'invitation"</strong>.</p></div></div>
-
-        <div class="step"><div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div>
-        <div class="step-content"><h3>Créez votre mot de passe maître</h3>
-        <p>C'est <strong>le seul mot de passe que vous devrez retenir</strong>. Choisissez quelque chose de solide : une phrase secrète ("MonChienMangeDes🍕le13Mai") plutôt qu'un mot compliqué. Minimum 12 caractères, avec majuscules, chiffres et symboles.</p>
-        <div class="warning-box" style="margin-top:1rem;"><div class="warning-icon">⚠️</div><div class="warning-content"><h4>ATTENTION CAPITAL</h4><p>Si vous perdez ce mot de passe maître, <strong>personne ne peut vous aider à récupérer vos données</strong>. Notez-le sur un papier et rangez-le en lieu sûr chez vous.</p></div></div>
-        </div></div>
-
-        <div class="step"><div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div>
-        <div class="step-content"><h3>Sauvegardez votre Kit d'Urgence</h3><p>1Password génère un document PDF appelé <strong>"Kit d'urgence"</strong> qui contient votre Clé Secrète (34 caractères). <strong>Imprimez ce document</strong> et rangez-le dans un coffre physique ou un tiroir fermé à clé. Ne le stockez PAS sur votre ordinateur uniquement.</p></div></div>
-
-        <div class="step"><div class="step-left"><div class="step-num">4</div><div class="step-line"></div></div>
-        <div class="step-content"><h3>Activez le MFA (voir section MFA)</h3><p>Suivez la procédure d'activation du MFA décrite plus haut dans ce guide. C'est fortement recommandé par votre entreprise.</p></div></div>
-
-        <div class="step"><div class="step-left"><div class="step-num">5</div><div class="step-line"></div></div>
-        <div class="step-content"><h3>Installez l'extension navigateur</h3><p>Allez sur <code>1password.com/downloads</code>, téléchargez l'extension pour votre navigateur (Chrome, Firefox, Edge...). Elle remplira vos mots de passe automatiquement sur les sites web.</p></div></div>
-
-        <div class="step"><div class="step-left"><div class="step-num">6</div><div class="step-line"></div></div>
-        <div class="step-content"><h3>Installez l'appli sur votre téléphone (optionnel mais recommandé)</h3><p>Cherchez "1Password" sur l'App Store ou le Play Store. Connectez-vous avec votre email, mot de passe maître et Clé Secrète. Vos mots de passe seront alors disponibles partout.</p></div></div>
+        <div class="step"><div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div><div class="step-content"><h3>Ouvrez l'email d'invitation</h3><p>Cherchez un email de la part de <code>1password.com</code> dans votre boîte mail. Cliquez sur <strong>"Rejoindre l'équipe"</strong> ou <strong>"Accepter l'invitation".</strong></p></div></div>
+        <div class="step"><div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div><div class="step-content"><h3>Créez votre mot de passe maître</h3><p>C'est <strong>le seul mot de passe que vous devrez retenir.</strong> Choisissez une phrase secrète mémorable plutôt qu'un mot compliqué. Minimum 12 caractères avec majuscules, chiffres et symboles.
+        <div class="warning-box" style="margin-top:0.9rem;"><div class="warning-icon">⚠️</div><div class="warning-content"><h4>Attention capital</h4><p>Si vous oubliez ce mot de passe maître, <strong>personne ne peut vous aider à récupérer vos données.</strong> Notez-le sur un papier et rangez-le en lieu sûr chez vous.</p></div></div></p></div></div>
+        <div class="step"><div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div><div class="step-content"><h3>Sauvegardez votre Kit d'Urgence</h3><p>1Password génère un PDF appelé <strong>"Kit d'urgence"</strong> qui contient votre Clé Secrète. <strong>Imprimez ce document</strong> et rangez-le dans un tiroir fermé à clé. Ne le stockez pas uniquement sur votre ordinateur.</p></div></div>
+        <div class="step"><div class="step-left"><div class="step-num">4</div><div class="step-line"></div></div><div class="step-content"><h3>Activez le MFA</h3><p>Suivez la procédure d'activation du MFA décrite dans la section précédente. C'est fortement recommandé.</p></div></div>
+        <div class="step"><div class="step-left"><div class="step-num">5</div><div class="step-line"></div></div><div class="step-content"><h3>Installez l'extension navigateur</h3><p>Allez sur <code>1password.com/downloads</code> et téléchargez l'extension pour votre navigateur (Chrome, Firefox, Edge...). Elle remplira vos mots de passe automatiquement.</p></div></div>
+        <div class="step"><div class="step-left"><div class="step-num">6</div><div class="step-line"></div></div><div class="step-content"><h3>Installez l'appli sur votre téléphone (recommandé)</h3><p>Cherchez "1Password" sur l'App Store ou le Play Store. Connectez-vous avec votre email, mot de passe maître et Clé Secrète. Vos mots de passe seront disponibles partout.</p></div></div>
       </div>
     </div>
 
     <div id="proc-add-pwd" class="proc-content">
       <div class="highlight-box">
-        <h3 style="font-family:'Syne',sans-serif; font-weight:700; margin-bottom:1rem;">➕ Ajouter un nouveau mot de passe manuellement</h3>
-        <p style="color:var(--text2); font-size:0.9rem; margin-bottom:1.5rem;">Vous avez un compte existant que vous voulez sauvegarder dans 1Password :</p>
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:700;margin-bottom:0.75rem;font-size:1rem;">Ajouter un mot de passe manuellement</h3>
+        <p style="color:var(--text2);font-size:0.84rem;">Vous avez un compte existant que vous voulez sauvegarder dans 1Password.</p>
       </div>
       <div class="steps">
-        <div class="step"><div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div>
-        <div class="step-content"><h3>Ouvrez 1Password</h3><p>Lancez l'application et déverrouillez-la. Assurez-vous d'être dans le bon coffre (généralement "Employé" pour vos affaires personnelles).</p></div></div>
-
-        <div class="step"><div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div>
-        <div class="step-content"><h3>Cliquez sur "Nouvel élément"</h3><p>Cherchez le bouton <strong>"+"</strong> ou <strong>"Nouvel élément"</strong>. Choisissez le type : <strong>"Identifiant de connexion"</strong> pour un site web standard.</p></div></div>
-
-        <div class="step"><div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div>
-        <div class="step-content"><h3>Remplissez les informations</h3><p>Donnez un <strong>nom reconnaissable</strong> (ex: "Amazon France"), entrez l'<strong>adresse du site</strong> (amazon.fr), votre <strong>nom d'utilisateur</strong> (email) et votre <strong>mot de passe actuel</strong>.</p></div></div>
-
-        <div class="step"><div class="step-left"><div class="step-num">4</div><div class="step-line"></div></div>
-        <div class="step-content"><h3>Sauvegardez</h3><p>Cliquez sur <strong>"Enregistrer"</strong>. 1Password retient tout. La prochaine fois que vous visitez ce site, l'extension remplira tout automatiquement.</p></div></div>
+        <div class="step"><div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div><div class="step-content"><h3>Ouvrez 1Password</h3><p>Lancez l'application et déverrouillez-la. Assurez-vous d'être dans le bon coffre (généralement "Employé" pour vos affaires personnelles).</p></div></div>
+        <div class="step"><div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div><div class="step-content"><h3>Cliquez sur "Nouvel élément"</h3><p>Cherchez le bouton <strong>"+"</strong> ou <strong>"Nouvel élément".</strong> Choisissez <strong>"Identifiant de connexion"</strong> pour un site web standard.</p></div></div>
+        <div class="step"><div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div><div class="step-content"><h3>Remplissez les informations</h3><p>Donnez un nom reconnaissable (ex : "Amazon France"), l'adresse du site (amazon.fr), votre nom d'utilisateur (email) et votre mot de passe actuel.</p></div></div>
+        <div class="step"><div class="step-left"><div class="step-num">4</div><div class="step-line"></div></div><div class="step-content"><h3>Sauvegardez</h3><p>Cliquez sur <strong>"Enregistrer".</strong> La prochaine fois que vous visitez ce site, l'extension remplira tout automatiquement.</p></div></div>
       </div>
-
-      <div class="info-box">
-        <div class="info-icon">💡</div>
-        <div class="info-content">
-          <h4>Astuce : La méthode automatique</h4>
-          <p>Si vous avez l'extension 1Password dans votre navigateur, elle propose automatiquement de <strong>sauvegarder votre mot de passe</strong> à chaque fois que vous vous connectez à un site. C'est encore plus simple !</p>
-        </div>
-      </div>
+      <div class="info-box"><div class="info-icon">💡</div><div class="info-content"><h4>Astuce : la méthode automatique</h4><p>L'extension 1Password propose automatiquement de sauvegarder votre mot de passe à chaque connexion sur un site. C'est encore plus simple.</p></div></div>
     </div>
 
     <div id="proc-generate" class="proc-content">
       <div class="highlight-box">
-        <h3 style="font-family:'Syne',sans-serif; font-weight:700; margin-bottom:1rem;">🎲 Générer un mot de passe ultra-sécurisé</h3>
-        <p style="color:var(--text2); font-size:0.9rem; margin-bottom:1.5rem;">Quand vous créez un nouveau compte sur un site, laissez 1Password créer le mot de passe à votre place :</p>
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:700;margin-bottom:0.75rem;font-size:1rem;">Générer un mot de passe ultra-sécurisé</h3>
+        <p style="color:var(--text2);font-size:0.84rem;">Quand vous créez un nouveau compte, laissez 1Password créer le mot de passe à votre place.</p>
       </div>
       <div class="steps">
-        <div class="step"><div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div>
-        <div class="step-content"><h3>Sur le site en question, cliquez sur "Créer un compte"</h3><p>Quand vous arrivez au champ "Créer un mot de passe", ne tapez rien encore.</p></div></div>
-
-        <div class="step"><div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div>
-        <div class="step-content"><h3>L'extension 1Password s'active</h3><p>Une petite icône 1Password apparaît dans le champ. Cliquez dessus. Choisissez <strong>"Générer un mot de passe"</strong>.</p></div></div>
-
-        <div class="step"><div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div>
-        <div class="step-content"><h3>1Password crée un mot de passe parfait</h3><p>Un mot de passe de 20 caractères ou plus, totalement aléatoire, est généré. Du genre <code>Xp#9mKz!4rQv&7nL@Bw2</code>. Vous ne l'aurez jamais à taper vous-même.</p></div></div>
-
-        <div class="step"><div class="step-left"><div class="step-num">4</div><div class="step-line"></div></div>
-        <div class="step-content"><h3>Cliquez "Utiliser ce mot de passe"</h3><p>1Password remplit le champ automatiquement ET sauvegarde le mot de passe dans votre coffre. Vous n'avez rien à retenir.</p></div></div>
+        <div class="step"><div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div><div class="step-content"><h3>Allez sur le site, cliquez "Créer un compte"</h3><p>Quand vous arrivez au champ "Créer un mot de passe", ne tapez rien encore.</p></div></div>
+        <div class="step"><div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div><div class="step-content"><h3>L'extension 1Password s'active</h3><p>Une petite icône 1Password apparaît dans le champ. Cliquez dessus. Choisissez <strong>"Générer un mot de passe".</strong></p></div></div>
+        <div class="step"><div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div><div class="step-content"><h3>1Password crée un mot de passe parfait</h3><p>Un mot de passe de 20 caractères aléatoires est généré. Du genre <code>Xp#9mKz!4rQv&amp;7nL@Bw2</code>. Vous ne l'aurez jamais à taper vous-même.</p></div></div>
+        <div class="step"><div class="step-left"><div class="step-num">4</div><div class="step-line"></div></div><div class="step-content"><h3>Cliquez "Utiliser ce mot de passe"</h3><p>1Password remplit le champ et sauvegarde le mot de passe dans votre coffre. Vous n'avez rien à retenir.</p></div></div>
       </div>
-
-      <div class="success-box">
-        <div class="success-icon">🎉</div>
-        <div class="success-content">
-          <h4>Le bonheur du gestionnaire de mots de passe</h4>
-          <p>Vous ne connaissez pas votre propre mot de passe ! Et c'est exactement le but. Un mot de passe que vous ne pouvez pas deviner, un hacker ne peut pas le deviner non plus.</p>
-        </div>
-      </div>
+      <div class="success-box"><div class="success-icon">🎉</div><div class="success-content"><h4>Le bonheur du gestionnaire de mots de passe</h4><p>Vous ne connaissez pas votre propre mot de passe ! Et c'est exactement le but. Un mot de passe que vous ne pouvez pas deviner, un hacker ne peut pas le deviner non plus.</p></div></div>
     </div>
 
     <div id="proc-first-login" class="proc-content">
       <div class="highlight-box">
-        <h3 style="font-family:'Syne',sans-serif; font-weight:700; margin-bottom:1rem;">🔑 Se connecter à 1Password pour la première fois sur un nouvel appareil</h3>
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:700;margin-bottom:0.75rem;font-size:1rem;">Se connecter pour la première fois sur un nouvel appareil</h3>
       </div>
       <div class="steps">
-        <div class="step"><div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div>
-        <div class="step-content"><h3>Lancez 1Password</h3><p>Sur le nouvel appareil (nouveau PC, nouveau téléphone...), ouvrez 1Password. Choisissez <strong>"Se connecter avec un compte existant"</strong>.</p></div></div>
-
-        <div class="step"><div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div>
-        <div class="step-content"><h3>Entrez l'adresse de votre équipe</h3><p>C'est généralement quelque chose comme <code>monentreprise.1password.com</code>. Votre IT peut vous confirmer cette adresse.</p></div></div>
-
-        <div class="step"><div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div>
-        <div class="step-content"><h3>Entrez votre email et mot de passe maître</h3><p>Renseignez votre adresse email professionnelle et votre mot de passe maître.</p></div></div>
-
-        <div class="step"><div class="step-left"><div class="step-num">4</div><div class="step-line"></div></div>
-        <div class="step-content"><h3>Scannez votre Kit d'Urgence (ou entrez la Clé Secrète)</h3><p>C'est là que votre Kit d'Urgence imprimé devient précieux ! Scannez le QR Code dessus avec votre caméra, ou tapez manuellement la Clé Secrète (34 caractères, format: A3-XXXXXX-...).</p></div></div>
-
-        <div class="step"><div class="step-left"><div class="step-num">5</div><div class="step-line"></div></div>
-        <div class="step-content"><h3>Validez avec votre MFA</h3><p>Ouvrez votre application d'authentification, entrez le code à 6 chiffres. Vous êtes connecté !</p></div></div>
+        <div class="step"><div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div><div class="step-content"><h3>Lancez 1Password</h3><p>Sur le nouvel appareil, ouvrez 1Password. Choisissez <strong>"Se connecter avec un compte existant".</strong></p></div></div>
+        <div class="step"><div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div><div class="step-content"><h3>Entrez l'adresse de votre équipe</h3><p>Généralement quelque chose comme <code>monentreprise.1password.com</code>. Votre IT peut vous confirmer cette adresse.</p></div></div>
+        <div class="step"><div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div><div class="step-content"><h3>Email et mot de passe maître</h3><p>Renseignez votre adresse email professionnelle et votre mot de passe maître.</p></div></div>
+        <div class="step"><div class="step-left"><div class="step-num">4</div><div class="step-line"></div></div><div class="step-content"><h3>Scannez votre Kit d'Urgence</h3><p>C'est là que votre Kit d'Urgence imprimé devient précieux. Scannez le QR Code avec votre caméra, ou tapez manuellement la Clé Secrète (format : A3-XXXXXX-...).</p></div></div>
+        <div class="step"><div class="step-left"><div class="step-num">5</div><div class="step-line"></div></div><div class="step-content"><h3>Validez avec votre MFA</h3><p>Ouvrez votre application d'authentification, entrez le code à 6 chiffres. Vous êtes connecté.</p></div></div>
       </div>
     </div>
 
     <div id="proc-mobile" class="proc-content">
       <div class="highlight-box">
-        <h3 style="font-family:'Syne',sans-serif; font-weight:700; margin-bottom:1rem;">📱 Utiliser 1Password sur votre téléphone</h3>
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:700;margin-bottom:0.75rem;font-size:1rem;">Utiliser 1Password sur votre téléphone</h3>
       </div>
       <div class="steps">
-        <div class="step"><div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div>
-        <div class="step-content"><h3>Téléchargez 1Password</h3><p>App Store (iPhone) ou Play Store (Android). Cherchez "1Password" — l'icône est un cadenas avec un cercle bleu.</p></div></div>
-
-        <div class="step"><div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div>
-        <div class="step-content"><h3>Connectez-vous</h3><p>Suivez les étapes de connexion (voir "Première connexion"). Sur téléphone, vous pouvez aussi scanner un QR Code depuis votre ordinateur depuis les paramètres de 1Password.</p></div></div>
-
-        <div class="step"><div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div>
-        <div class="step-content"><h3>Activez le remplissage automatique (iPhone)</h3><p>Allez dans Réglages → Mots de passe → Remplissage automatique → Activez et choisissez <strong>"1Password"</strong>. Désactivez "Trousseau iCloud" pour éviter les conflits.</p></div></div>
-
-        <div class="step"><div class="step-left"><div class="step-num">4</div><div class="step-line"></div></div>
-        <div class="step-content"><h3>Activez le remplissage automatique (Android)</h3><p>Allez dans Paramètres → Gestion des mots de passe → Remplissage automatique → Choisissez <strong>"1Password"</strong>.</p></div></div>
-
-        <div class="step"><div class="step-left"><div class="step-num">5</div><div class="step-line"></div></div>
-        <div class="step-content"><h3>Profitez !</h3><p>Désormais, quand vous ouvrez une app ou un site sur votre téléphone, 1Password vous proposera de remplir automatiquement vos identifiants. Confirmez avec votre empreinte digitale ou Face ID.</p></div></div>
+        <div class="step"><div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div><div class="step-content"><h3>Téléchargez 1Password</h3><p>App Store (iPhone) ou Play Store (Android). Cherchez "1Password" et installez-le.</p></div></div>
+        <div class="step"><div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div><div class="step-content"><h3>Connectez-vous</h3><p>Suivez les étapes de connexion de l'onglet "Nouvel appareil" ci-dessus. Sur téléphone, vous pouvez aussi scanner un QR Code depuis votre ordinateur.</p></div></div>
+        <div class="step"><div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div><div class="step-content"><h3>Activez le remplissage automatique (iPhone)</h3><p>Allez dans Réglages &gt; Mots de passe &gt; Remplissage automatique &gt; activez et choisissez <strong>"1Password".</strong> Désactivez "Trousseau iCloud" pour éviter les conflits.</p></div></div>
+        <div class="step"><div class="step-left"><div class="step-num">4</div><div class="step-line"></div></div><div class="step-content"><h3>Activez le remplissage automatique (Android)</h3><p>Paramètres &gt; Gestion des mots de passe &gt; Remplissage automatique &gt; choisissez <strong>"1Password".</strong></p></div></div>
+        <div class="step"><div class="step-left"><div class="step-num">5</div><div class="step-line"></div></div><div class="step-content"><h3>Profitez !</h3><p>Quand vous ouvrez une appli ou un site, 1Password vous propose de remplir vos identifiants. Confirmez avec votre empreinte digitale ou Face ID.</p></div></div>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -2122,72 +1580,55 @@
 <section id="retraite" class="section-anchor">
   <div class="container">
     <span class="section-label">🌅 Départ en retraite</span>
-    <h2 class="section-title">Vous partez à la retraite ? Et vos mots de passe ?</h2>
-    <p class="section-desc">Bonne nouvelle : vous ne repartez pas les mains vides. Votre coffre privé "Employé" vous appartient. Voici comment tout récupérer proprement.</p>
+    <h2 class="section-title">Vous partez à la retraite ?</h2>
+    <p class="section-desc">Bonne nouvelle : vous ne repartez pas les mains vides. Votre coffre privé vous appartient.</p>
 
     <div class="warning-box">
       <div class="warning-icon">⏰</div>
       <div class="warning-content">
-        <h4>Faites-le AVANT votre dernier jour</h4>
+        <h4>Faites-le avant votre dernier jour</h4>
         <p>Une fois votre compte désactivé par l'IT, vous ne pourrez plus accéder aux données. Prévoyez cette procédure au moins une semaine avant votre départ.</p>
       </div>
     </div>
 
-    <h3 style="font-family:'Syne',sans-serif; font-weight:700; margin:2rem 0 1rem; font-size:1.2rem;">📤 Procédure d'export de vos données</h3>
+    <h3 style="font-family:'Outfit',sans-serif;font-weight:700;margin:1.75rem 0 1rem;font-size:1.05rem;">📤 Procédure d'export</h3>
 
     <div class="steps">
-      <div class="step"><div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div>
-      <div class="step-content"><h3>Ouvrez 1Password sur votre ordinateur</h3><p>Connectez-vous une dernière fois. Allez dans votre coffre "Employé" — uniquement lui, pas les coffres partagés d'entreprise qui appartiennent à l'entreprise.</p></div></div>
-
-      <div class="step"><div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div>
-      <div class="step-content"><h3>Menu Fichier → Exporter</h3><p>Cliquez sur <strong>Fichier</strong> (en haut à gauche) → <strong>Exporter</strong> → <strong>Tous les éléments</strong>. Sur Mac, c'est dans le menu "1Password" → "Exporter".</p></div></div>
-
-      <div class="step"><div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div>
-      <div class="step-content"><h3>Choisissez le format d'export</h3>
-      <p>Deux options recommandées :</p>
-      <div style="margin-top:0.75rem; display:flex; gap:1rem; flex-wrap:wrap;">
-        <div class="card" style="padding:1rem; flex:1; min-width:200px;">
-          <div style="font-weight:600; margin-bottom:0.5rem;">📄 Format 1PIF</div>
-          <p style="font-size:0.82rem;">Format propriétaire 1Password. Parfait si vous comptez réimporter dans un autre compte 1Password personnel.</p>
-          <span class="tag tag-green">Recommandé</span>
+      <div class="step"><div class="step-left"><div class="step-num">1</div><div class="step-line"></div></div><div class="step-content"><h3>Ouvrez 1Password sur votre ordinateur</h3><p>Connectez-vous et allez dans votre coffre "Employé". Uniquement lui, pas les coffres partagés d'entreprise qui appartiennent à l'entreprise.</p></div></div>
+      <div class="step"><div class="step-left"><div class="step-num">2</div><div class="step-line"></div></div><div class="step-content"><h3>Menu Fichier puis Exporter</h3><p>Cliquez sur <strong>Fichier</strong> (en haut à gauche) puis <strong>Exporter</strong> puis <strong>Tous les éléments.</strong> Sur Mac : menu "1Password" puis "Exporter".</p></div></div>
+      <div class="step"><div class="step-left"><div class="step-num">3</div><div class="step-line"></div></div><div class="step-content"><h3>Choisissez le format</h3>
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:0.75rem;">
+        <div class="card" style="padding:1rem;flex:1;min-width:180px;">
+          <div style="font-weight:700;font-size:0.85rem;margin-bottom:0.4rem;">📄 Format 1PIF</div>
+          <p>Format propriétaire 1Password. Parfait si vous comptez réimporter dans un compte personnel.</p>
+          <span class="tag tag-green" style="margin-top:0.5rem;display:inline-block;">Recommandé</span>
         </div>
-        <div class="card" style="padding:1rem; flex:1; min-width:200px;">
-          <div style="font-weight:600; margin-bottom:0.5rem;">📊 Format CSV</div>
-          <p style="font-size:0.82rem;">Lisible dans Excel. Pratique si vous souhaitez voir/imprimer vos mots de passe. Attention : fichier non chiffré !</p>
-          <span class="tag tag-orange">Avec prudence</span>
+        <div class="card" style="padding:1rem;flex:1;min-width:180px;">
+          <div style="font-weight:700;font-size:0.85rem;margin-bottom:0.4rem;">📊 Format CSV</div>
+          <p>Lisible dans Excel. Pratique pour imprimer. Attention : fichier non chiffré !</p>
+          <span class="tag tag-orange" style="margin-top:0.5rem;display:inline-block;">Avec prudence</span>
         </div>
-      </div>
-      </div></div>
-
-      <div class="step"><div class="step-left"><div class="step-num">4</div><div class="step-line"></div></div>
-      <div class="step-content"><h3>Entrez votre mot de passe maître pour confirmer</h3><p>1Password vous demandera votre mot de passe maître comme confirmation de sécurité. C'est normal.</p></div></div>
-
-      <div class="step"><div class="step-left"><div class="step-num">5</div><div class="step-line"></div></div>
-      <div class="step-content"><h3>Sauvegardez le fichier en lieu sûr</h3>
-      <p>Copiez ce fichier sur une <strong>clé USB chiffrée</strong> (BitLocker ou VeraCrypt) ou dans votre coffre-fort physique à la maison. <strong>Ne le laissez pas traîner sur votre bureau !</strong></p>
-      <div class="warning-box" style="margin-top:0.75rem;"><div class="warning-icon">🔓</div><div class="warning-content"><h4>Fichier CSV = Mots de passe en clair</h4><p>Si quelqu'un trouve ce fichier CSV, il peut lire tous vos mots de passe. Chiffrez le fichier ou utilisez le format 1PIF qui lui reste chiffré.</p></div></div>
-      </div></div>
-
-      <div class="step"><div class="step-left"><div class="step-num">6</div><div class="step-line"></div></div>
-      <div class="step-content"><h3>Créez votre compte 1Password personnel (optionnel)</h3><p>Vous pouvez ouvrir un compte 1Password individuel sur <code>1password.com</code> (environ 3€/mois). Importez ensuite votre fichier exporté pour retrouver tous vos mots de passe dans votre nouveau compte personnel.</p></div></div>
-
-      <div class="step"><div class="step-left"><div class="step-num">7</div><div class="step-line"></div></div>
-      <div class="step-content"><h3>Signalez-le à votre IT avant de partir</h3><p>Prévenez votre département IT que vous avez exporté votre coffre personnel. Ils pourront confirmer que les accès aux coffres partagés d'entreprise ont bien été révoqués de votre côté.</p></div></div>
+      </div></div></div>
+      <div class="step"><div class="step-left"><div class="step-num">4</div><div class="step-line"></div></div><div class="step-content"><h3>Entrez votre mot de passe maître</h3><p>1Password vous le demande comme confirmation de sécurité. C'est normal.</p></div></div>
+      <div class="step"><div class="step-left"><div class="step-num">5</div><div class="step-line"></div></div><div class="step-content"><h3>Sauvegardez le fichier en lieu sûr</h3><p>Copiez-le sur une <strong>clé USB chiffrée</strong> (BitLocker ou VeraCrypt) ou dans votre coffre-fort physique.
+      <div class="warning-box" style="margin-top:0.75rem;"><div class="warning-icon">🔓</div><div class="warning-content"><h4>Fichier CSV = mots de passe en clair</h4><p>Si quelqu'un trouve ce fichier, il peut lire tous vos mots de passe. Préférez le format 1PIF qui reste chiffré.</p></div></div></p></div></div>
+      <div class="step"><div class="step-left"><div class="step-num">6</div><div class="step-line"></div></div><div class="step-content"><h3>Créez votre compte 1Password personnel (optionnel)</h3><p>Vous pouvez ouvrir un compte individuel sur <code>1password.com</code> (environ 3 euros par mois) et y importer votre fichier exporté.</p></div></div>
+      <div class="step"><div class="step-left"><div class="step-num">7</div><div class="step-line"></div></div><div class="step-content"><h3>Signalez-le à votre IT</h3><p>Prévenez votre IT que vous avez exporté votre coffre personnel, afin qu'ils confirment la révocation de vos accès partagés.</p></div></div>
     </div>
 
-    <div class="success-box" style="margin-top:2rem;">
+    <div class="success-box" style="margin-top:1.75rem;">
       <div class="success-icon">🌟</div>
       <div class="success-content">
-        <h4>Ce que vous gardez à la retraite</h4>
-        <p>Tous vos mots de passe <strong>personnels</strong> stockés dans votre coffre "Employé" (banque, Amazon, réseaux sociaux, espace retraite AGIRC-ARRCO...). Vous ne perdez rien de ce qui est à vous.</p>
+        <h4>Ce que vous gardez</h4>
+        <p>Tous vos mots de passe <strong>personnels</strong> : banque, Amazon, réseaux sociaux, espace retraite AGIRC-ARRCO... Vous ne perdez rien de ce qui est à vous.</p>
       </div>
     </div>
 
-    <div class="info-box" style="margin-top:1rem;">
+    <div class="info-box">
       <div class="info-icon">ℹ️</div>
       <div class="info-content">
         <h4>Ce que vous perdez</h4>
-        <p>L'accès aux coffres <strong>partagés de l'entreprise</strong> (ce qui est normal — ces identifiants appartiennent à l'entreprise). Votre successeur recevra les accès dont il a besoin de la part de l'IT.</p>
+        <p>L'accès aux coffres <strong>partagés de l'entreprise</strong> (c'est normal : ces identifiants appartiennent à l'entreprise). Votre successeur recevra les accès dont il a besoin.</p>
       </div>
     </div>
   </div>
@@ -2199,53 +1640,25 @@
 <section class="section-alt">
   <div class="container">
     <span class="section-label">📊 Comparatif</span>
-    <h2 class="section-title">Avec ou sans 1Password — La différence concrète</h2>
+    <h2 class="section-title">Avec ou sans 1Password</h2>
 
-    <div style="background:var(--card); border:1px solid var(--border); border-radius:20px; overflow:hidden;">
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;overflow-x:auto;">
       <table class="comparison">
         <thead>
           <tr>
             <th>Situation</th>
-            <th>❌ Sans 1Password</th>
-            <th>✅ Avec 1Password</th>
+            <th>Sans 1Password</th>
+            <th>Avec 1Password</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td><strong>Votre mot de passe Amazon</strong></td>
-            <td style="color:var(--red)">Dupont2026 — crackable en 1min</td>
-            <td style="color:var(--green)">Kp#9mXz!4rQv — craké en 300 milliards d'années</td>
-          </tr>
-          <tr>
-            <td><strong>Nombre de mots de passe différents</strong></td>
-            <td style="color:var(--red)">1-3 mots de passe pour tout</td>
-            <td style="color:var(--green)">Un mot de passe unique par site</td>
-          </tr>
-          <tr>
-            <td><strong>Un site piraté</strong></td>
-            <td style="color:var(--red)">Tous vos comptes compromis</td>
-            <td style="color:var(--green)">Un seul compte concerné, les autres intacts</td>
-          </tr>
-          <tr>
-            <td><strong>Nouveau poste de travail</strong></td>
-            <td style="color:var(--red)">Vous cherchez vos mots de passe pendant des heures</td>
-            <td style="color:var(--green)">Connectez 1Password, tout est là en 2 minutes</td>
-          </tr>
-          <tr>
-            <td><strong>Collègue absent</strong></td>
-            <td style="color:var(--red)">L'accès au logiciel est bloqué</td>
-            <td style="color:var(--green)">Les identifiants partagés sont dans le coffre commun</td>
-          </tr>
-          <tr>
-            <td><strong>Départ de l'entreprise</strong></td>
-            <td style="color:var(--red)">Vous perdez tous vos accès</td>
-            <td style="color:var(--green)">Vous exportez vos données personnelles</td>
-          </tr>
-          <tr>
-            <td><strong>Phishing (fausse page de connexion)</strong></td>
-            <td style="color:var(--red)">Vous entrez vos identifiants sans vous en rendre compte</td>
-            <td style="color:var(--green)">1Password refuse de remplir sur un faux site (mauvaise URL)</td>
-          </tr>
+          <tr><td><strong>Mot de passe Amazon</strong></td><td style="color:var(--red)">Dupont2026 &mdash; crackable en 1 min</td><td style="color:var(--green)">Kp#9mXz!4rQv &mdash; 300 milliards d'années</td></tr>
+          <tr><td><strong>Nombre de mots de passe</strong></td><td style="color:var(--red)">1 à 3 mots de passe pour tout</td><td style="color:var(--green)">Un mot de passe unique par site</td></tr>
+          <tr><td><strong>Un site piraté</strong></td><td style="color:var(--red)">Tous vos comptes compromis</td><td style="color:var(--green)">Un seul compte concerné, les autres intacts</td></tr>
+          <tr><td><strong>Nouveau poste de travail</strong></td><td style="color:var(--red)">Vous cherchez pendant des heures</td><td style="color:var(--green)">Tout est là en 2 minutes</td></tr>
+          <tr><td><strong>Collègue absent</strong></td><td style="color:var(--red)">L'accès au logiciel est bloqué</td><td style="color:var(--green)">Les identifiants partagés sont dans le coffre</td></tr>
+          <tr><td><strong>Départ de l'entreprise</strong></td><td style="color:var(--red)">Vous perdez tout</td><td style="color:var(--green)">Vous exportez vos données personnelles</td></tr>
+          <tr><td><strong>Fausse page de connexion</strong></td><td style="color:var(--red)">Vous entrez vos identifiants sans vous en rendre compte</td><td style="color:var(--green)">1Password refuse de remplir (mauvaise URL)</td></tr>
         </tbody>
       </table>
     </div>
@@ -2259,77 +1672,48 @@
   <div class="container">
     <span class="section-label">❓ Questions fréquentes</span>
     <h2 class="section-title">Vos questions, nos réponses</h2>
-    <p class="section-desc" style="margin-bottom:2rem;">Les questions que tout le monde pose mais que personne n'ose poser.</p>
+    <p class="section-desc" style="margin-bottom:1.75rem;">Les questions que tout le monde se pose.</p>
 
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <button class="faq-q">Et si j'oublie mon mot de passe maître ? <span class="faq-icon">+</span></button>
-      <div class="faq-a">C'est la grande limitation de 1Password : <strong>personne ne peut vous aider si vous l'oubliez</strong>. C'est le prix de la sécurité absolue. C'est pourquoi il est crucial de (1) choisir quelque chose de mémorable, (2) noter votre Kit d'Urgence physiquement et le ranger en lieu sûr, (3) vous connecter régulièrement pour ne pas l'oublier. Si vous perdez vraiment accès, l'IT devra créer un nouveau compte et vous perdrez les données du coffre privé.</div>
-    </div>
+    <div class="faq-item" onclick="toggleFaq(this)"><button class="faq-q">Et si j'oublie mon mot de passe maître ? <span class="faq-icon">+</span></button><div class="faq-a">C'est la grande limitation de 1Password : <strong>personne ne peut vous aider si vous l'oubliez.</strong> C'est le prix de la sécurité absolue. Choisissez quelque chose de mémorable, notez votre Kit d'Urgence physiquement, et connectez-vous régulièrement pour ne pas l'oublier. Si vous perdez vraiment accès, l'IT devra créer une demande de récupération de compte.</div></div>
 
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <button class="faq-q">Mon patron peut-il lire mes mots de passe dans mon coffre "Employé" ? <span class="faq-icon">+</span></button>
-      <div class="faq-a"><strong>Non, absolument pas.</strong> Le coffre "Employé" est chiffré avec une clé que seul vous possédez. Même l'administrateur de votre compte 1Password d'entreprise ne peut pas y accéder. Ni l'IT, ni votre responsable, ni 1Password l'entreprise. Ce coffre vous est strictement privé.</div>
-    </div>
+    <div class="faq-item" onclick="toggleFaq(this)"><button class="faq-q">Mon patron peut-il lire mon coffre "Employé" ? <span class="faq-icon">+</span></button><div class="faq-a"><strong>Non, absolument pas.</strong> Le coffre "Employé" est chiffré avec une clé que seul vous possédez. Ni votre responsable, ni l'IT, ni 1Password l'entreprise ne peuvent y accéder. Ce coffre vous est strictement privé.</div></div>
 
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <button class="faq-q">Est-ce que 1Password peut être piraté ? <span class="faq-icon">+</span></button>
-      <div class="faq-a">Les serveurs de 1Password pourraient théoriquement être piratés — mais ça n'a aucune importance ! Les hackers ne verraient que des données chiffrées illisibles. Sans votre mot de passe maître ET votre Clé Secrète (qui n'est jamais envoyée à leurs serveurs), les données sont inutilisables. 1Password a d'ailleurs publié sa cryptographie pour que des experts indépendants puissent la vérifier.</div>
-    </div>
+    <div class="faq-item" onclick="toggleFaq(this)"><button class="faq-q">Est-ce que 1Password peut être piraté ? <span class="faq-icon">+</span></button><div class="faq-a">Les serveurs de 1Password pourraient théoriquement être piratés, mais ça n'a aucune importance. Les hackers ne verraient que des données chiffrées illisibles. Sans votre mot de passe maître ET votre Clé Secrète (qui n'est jamais envoyée à leurs serveurs), les données sont inutilisables.</div></div>
 
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <button class="faq-q">Que se passe-t-il si mon téléphone tombe en panne et que je perds mon MFA ? <span class="faq-icon">+</span></button>
-      <div class="faq-a">C'est pour ça qu'on vous a demandé de sauvegarder les <strong>codes de récupération</strong> lors de l'activation du MFA. Ces codes à usage unique vous permettent de vous connecter sans votre téléphone. Si vous n'avez pas ces codes, vous devrez contacter votre IT qui pourra réinitialiser le MFA de votre compte après vérification de votre identité.</div>
-    </div>
+    <div class="faq-item" onclick="toggleFaq(this)"><button class="faq-q">Que faire si je perds mon téléphone et mon MFA ? <span class="faq-icon">+</span></button><div class="faq-a">C'est pour ça qu'on vous a demandé de sauvegarder les <strong>codes de récupération</strong> lors de l'activation du MFA. Ces codes à usage unique vous permettent de vous connecter sans téléphone. Sans ces codes, votre IT pourra réinitialiser le MFA après vérification de votre identité.</div></div>
 
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <button class="faq-q">Pourquoi ne pas simplement noter mes mots de passe dans un carnet ? <span class="faq-icon">+</span></button>
-      <div class="faq-a">Un carnet peut être perdu, volé ou oublié. Il ne peut pas générer des mots de passe aléatoires complexes. Il ne se synchronise pas entre vos appareils. Il ne remplit pas automatiquement les formulaires. Il n'alerte pas si un de vos sites a été piraté. Et si vous écrivez vos mots de passe en clair, toute personne qui trouve le carnet a accès à tout. 1Password résout tous ces problèmes.</div>
-    </div>
+    <div class="faq-item" onclick="toggleFaq(this)"><button class="faq-q">Pourquoi ne pas simplement noter mes mots de passe dans un carnet ? <span class="faq-icon">+</span></button><div class="faq-a">Un carnet peut être perdu ou volé. Il ne génère pas de mots de passe complexes. Il ne se synchronise pas. Il ne remplit pas automatiquement les formulaires. Il n'alerte pas si un site a été piraté. Et si quelqu'un le trouve, il a accès à tout. 1Password résout tous ces problèmes.</div></div>
 
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <button class="faq-q">Est-ce que 1Password peut voir mes mots de passe de la même façon que Google ? <span class="faq-icon">+</span></button>
-      <div class="faq-a">Non, et c'est une différence fondamentale. Google Chrome garde vos mots de passe sur ses serveurs et peut techniquement y accéder. 1Password utilise une architecture "zéro connaissance" : toutes les clés de chiffrement sont dérivées de votre mot de passe maître et de votre Clé Secrète, qui ne quittent jamais votre appareil. Même les ingénieurs de 1Password ne peuvent pas lire vos données.</div>
-    </div>
+    <div class="faq-item" onclick="toggleFaq(this)"><button class="faq-q">Est-ce différent du gestionnaire de Chrome ou Safari ? <span class="faq-icon">+</span></button><div class="faq-a">Oui, et c'est une différence fondamentale. Google et Apple peuvent techniquement accéder à vos mots de passe stockés dans leurs navigateurs. 1Password utilise une architecture "zéro connaissance" : toutes les clés de chiffrement sont sur votre appareil. Même les ingénieurs de 1Password ne peuvent pas lire vos données.</div></div>
 
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <button class="faq-q">J'ai 70 ans et je ne suis pas très à l'aise avec l'informatique. 1Password est-il fait pour moi ? <span class="faq-icon">+</span></button>
-      <div class="faq-a">Absolument ! Une fois configuré (votre IT peut vous aider), l'utilisation quotidienne se résume à : (1) déverrouiller 1Password avec votre mot de passe maître une fois par jour, (2) cliquer sur le petit bouton 1Password quand vous voulez vous connecter quelque part. C'est tout. Vous n'avez plus jamais à vous souvenir d'un mot de passe, 1Password le fait pour vous.</div>
-    </div>
+    <div class="faq-item" onclick="toggleFaq(this)"><button class="faq-q">Je ne suis pas très à l'aise avec l'informatique. C'est fait pour moi ? <span class="faq-icon">+</span></button><div class="faq-a">Absolument ! Une fois configuré (votre IT peut vous aider), l'utilisation quotidienne se résume à : déverrouiller 1Password une fois par jour, puis cliquer sur le bouton 1Password quand vous voulez vous connecter quelque part. C'est tout. Vous n'avez plus jamais à vous souvenir d'un mot de passe.</div></div>
 
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <button class="faq-q">Que se passe-t-il à mes données si 1Password ferme son entreprise ? <span class="faq-icon">+</span></button>
-      <div class="faq-a">1Password est une entreprise évaluée à plusieurs milliards de dollars, peu de risques à court terme. Mais si cela arrivait, vous auriez le temps d'exporter vos données (format CSV ou 1PIF) et de les migrer vers une autre solution. Vos données vous appartiennent, pas à eux.</div>
-    </div>
+    <div class="faq-item" onclick="toggleFaq(this)"><button class="faq-q">Et si 1Password ferme un jour ? <span class="faq-icon">+</span></button><div class="faq-a">1Password est une entreprise évaluée à plusieurs milliards de dollars. Mais si cela arrivait, vous auriez le temps d'exporter vos données (format CSV ou 1PIF) et de les migrer vers une autre solution. Vos données vous appartiennent.</div></div>
   </div>
 </section>
 
 <hr class="divider">
 
 <!-- ===== CTA FINAL ===== -->
-<section class="section-alt" style="text-align:center; padding:5rem 2rem;">
-  <div class="container" style="max-width:700px;">
-    <span style="font-size:4rem; display:block; margin-bottom:1.5rem;">🔐</span>
+<section class="section-alt" style="text-align:center;padding:4.5rem 1.5rem;">
+  <div class="container" style="max-width:640px;">
+    <span style="font-size:3.5rem;display:block;margin-bottom:1.25rem;">🔐</span>
     <h2 class="section-title">Vous êtes prêt !</h2>
-    <p style="color:var(--text2); font-size:1.05rem; margin-bottom:2rem;">
-      Vous savez maintenant tout sur 1Password : comment il fonctionne, pourquoi c'est essentiel, et comment l'utiliser au quotidien. La sécurité de vos données, c'est aussi la sécurité de votre entreprise.
-    </p>
-    <div class="success-box" style="text-align:left; margin-bottom:2rem;">
+    <p style="color:var(--text2);font-size:0.95rem;margin-bottom:1.75rem;line-height:1.75;">Vous savez maintenant comment 1Password fonctionne, pourquoi c'est essentiel, et comment l'utiliser au quotidien. La sécurité de vos données, c'est aussi la sécurité de votre entreprise.</p>
+    <div class="success-box" style="text-align:left;margin-bottom:1.75rem;">
       <div class="success-icon">✅</div>
       <div class="success-content">
         <h4>Pour aller plus loin</h4>
-        <p>Votre service IT est là pour vous accompagner. Si vous avez des questions, des problèmes de connexion, ou besoin d'aide pour configurer 1Password sur votre téléphone, n'hésitez pas à les contacter. C'est leur métier et ils sont là pour vous aider.</p>
+        <p>Votre service IT est là pour vous accompagner. Si vous avez des questions ou besoin d'aide pour configurer 1Password sur votre téléphone, n'hésitez pas à les contacter.</p>
       </div>
     </div>
-    <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+    <div style="display:flex;gap:0.75rem;justify-content:center;flex-wrap:wrap;">
       <a href="#cest-quoi" class="btn-primary">🔄 Relire depuis le début</a>
       <a href="mentions-legales.html" class="btn-secondary">📄 Mentions légales</a>
     </div>
-
-    <div style="margin-top:3rem; padding-top:2rem; border-top:1px solid var(--border);">
-      <p style="font-size:0.85rem; color:var(--text3);">
-        Ce guide a été créé avec ❤️ par <strong style="color:var(--text2);">Nollan DROGUET</strong>, étudiant en BTS SIO SISR à Rennes.<br>
-        Pour toute question : <a href="mailto:nollandroguetpro@gmail.com" style="color:var(--accent2);">nollandroguetpro@gmail.com</a>
-      </p>
+    <div style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid var(--border);">
+      <p style="font-size:0.8rem;color:var(--text3);">Guide créé avec &#10084;&#65039; par <strong style="color:var(--text2);">Nollan DROGUET</strong>, étudiant en BTS SIO SISR à Rennes.<br>
+      <a href="mailto:nollandroguetpro@gmail.com" style="color:var(--accent2);">nollandroguetpro@gmail.com</a></p>
     </div>
   </div>
 </section>
@@ -2338,12 +1722,12 @@
 <footer>
   <div class="footer-grid">
     <div class="footer-brand">
-      <div class="nav-logo" style="margin-bottom:1rem; display:flex; align-items:center; gap:10px;">
-        <div class="logo-icon" style="width:36px;height:36px;background:linear-gradient(135deg,var(--accent),var(--purple));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;">🔐</div>
-        <span style="font-family:'Syne',sans-serif;font-weight:800;">1Password Guide</span>
+      <div style="display:flex;align-items:center;gap:9px;margin-bottom:0.75rem;">
+        <div class="logo-icon">🔐</div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:1rem;">1Password Guide</span>
       </div>
-      <p>Guide non-officiel créé à des fins éducatives pour aider les utilisateurs non-techniques à comprendre et maîtriser 1Password en entreprise.</p>
-      <p style="margin-top:0.75rem; font-size:0.8rem;">Par <strong>Nollan DROGUET</strong> — BTS SIO SISR — Rennes</p>
+      <p>Guide non-officiel créé à des fins éducatives pour aider les utilisateurs non-techniques à comprendre 1Password en entreprise.</p>
+      <p style="margin-top:0.5rem;font-size:0.76rem;">Par <strong>Nollan DROGUET</strong> BTS SIO SISR à Rennes</p>
     </div>
     <div class="footer-col">
       <h5>Navigation</h5>
@@ -2360,51 +1744,51 @@
       <a href="#faq">FAQ</a>
     </div>
     <div class="footer-col">
-      <h5>Légal & Contact</h5>
+      <h5>Contact &amp; Légal</h5>
       <a href="mentions-legales.html">Mentions légales</a>
       <a href="mailto:nollandroguetpro@gmail.com">nollandroguetpro@gmail.com</a>
-      <a href="https://1password.com" target="_blank" rel="noopener">Site officiel 1Password ↗</a>
+      <a href="https://1password.com" target="_blank" rel="noopener">Site officiel 1Password &#8599;</a>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2026 Nollan DROGUET - Guide non-officiel, à titre éducatif uniquement. ;-)</p>
-    <p>1Password® est une marque déposée de <a href="https://1password.com" target="_blank" rel="noopener">AgileBits Inc.</a></p>
+    <p>&copy; 2026 Nollan DROGUET - Guide non-officiel, à titre éducatif uniquement.</p>
+    <p>1Password&reg; est une marque déposée de <a href="https://1password.com" target="_blank" rel="noopener">AgileBits Inc.</a></p>
   </div>
 </footer>
 
-<!-- ===== SCRIPTS ===== -->
 <script>
-  // ===== READING PROGRESS =====
+  // Progress bar
   window.addEventListener('scroll', () => {
     const el = document.getElementById('reading-progress');
-    const scrolled = window.scrollY;
-    const total = document.body.scrollHeight - window.innerHeight;
-    el.style.transform = `scaleX(${scrolled / total})`;
+    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+    el.style.transform = `scaleX(${pct})`;
   });
 
-  // ===== NAV TOGGLE =====
+  // Nav mobile
   function toggleNav() {
-    document.getElementById('navLinks').classList.toggle('open');
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+  function closeMobile() {
+    document.getElementById('mobileMenu').classList.remove('open');
   }
 
-  // ===== PROCEDURES TABS =====
-  function showProc(id) {
+  // Procedures tabs
+  function showProc(id, btn) {
     document.querySelectorAll('.proc-content').forEach(el => el.classList.remove('active'));
     document.querySelectorAll('.proc-tab').forEach(el => el.classList.remove('active'));
     document.getElementById('proc-' + id).classList.add('active');
-    event.target.classList.add('active');
+    btn.classList.add('active');
   }
 
-  // ===== FAQ TOGGLE =====
+  // FAQ
   function toggleFaq(el) {
     const isOpen = el.classList.contains('open');
     document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('open'));
     if (!isOpen) el.classList.add('open');
   }
 
-  // ===== PASSWORD ANALYZER =====
+  // Password analyzer
   let pwdVisible = false;
-
   function togglePwd() {
     const input = document.getElementById('pwdInput');
     pwdVisible = !pwdVisible;
@@ -2413,145 +1797,109 @@
   }
 
   function analyzePwd(pwd) {
-    if (!pwd) {
-      resetPwd(); return;
-    }
-
+    if (!pwd) { resetPwd(); return; }
     const len = pwd.length;
     document.getElementById('pwdLen').textContent = len + ' caractères';
-
-    // Charset size
-    let charset = 0;
-    if (/[a-z]/.test(pwd)) charset += 26;
-    if (/[A-Z]/.test(pwd)) charset += 26;
-    if (/[0-9]/.test(pwd)) charset += 10;
-    if (/[^a-zA-Z0-9]/.test(pwd)) charset += 32;
-
-    const entropy = Math.round(len * Math.log2(Math.max(charset, 1)));
+    let cs = 0;
+    if (/[a-z]/.test(pwd)) cs += 26;
+    if (/[A-Z]/.test(pwd)) cs += 26;
+    if (/[0-9]/.test(pwd)) cs += 10;
+    if (/[^a-zA-Z0-9]/.test(pwd)) cs += 32;
+    const entropy = Math.round(len * Math.log2(Math.max(cs, 1)));
     document.getElementById('entropy').textContent = entropy + ' bits';
-
-    // Score
     let score = 0;
-    if (len >= 8) score += 1;
-    if (len >= 12) score += 1;
+    if (len >= 8) score++;
+    if (len >= 12) score++;
     if (len >= 16) score += 2;
-    if (len >= 20) score += 1;
-    if (/[A-Z]/.test(pwd)) score += 1;
-    if (/[0-9]/.test(pwd)) score += 1;
+    if (len >= 20) score++;
+    if (/[A-Z]/.test(pwd)) score++;
+    if (/[0-9]/.test(pwd)) score++;
     if (/[^a-zA-Z0-9]/.test(pwd)) score += 2;
-    if (entropy > 80) score += 1;
+    if (entropy > 80) score++;
     score = Math.min(10, score);
-
     document.getElementById('pwdScore').textContent = score + '/10';
-
-    // Colors and labels
     const bar = document.getElementById('pwdBar');
     const label = document.getElementById('pwdLabel');
-    const pct = (score / 10) * 100;
-    bar.style.width = pct + '%';
-
+    bar.style.width = (score / 10 * 100) + '%';
     const levels = [
-      { max: 2, color: '#ef4444', text: '🚨 Très faible — Craqué en quelques secondes' },
-      { max: 4, color: '#f97316', text: '⚠️ Faible — Craqué en quelques minutes à heures' },
-      { max: 6, color: '#eab308', text: '🟡 Moyen — Résiste quelques jours' },
-      { max: 8, color: '#22c55e', text: '✅ Fort — Résiste plusieurs années' },
-      { max: 10, color: '#3b82f6', text: '🔒 Très fort — Résiste des siècles (ou plus)' },
+      { max: 2, color: '#f87171', text: '🚨 Très faible - craqué en quelques secondes' },
+      { max: 4, color: '#fb923c', text: '⚠️ Faible - craqué en quelques minutes' },
+      { max: 6, color: '#fbbf24', text: '🟡 Moyen - résiste quelques jours' },
+      { max: 8, color: '#34d399', text: '✅ Fort - résiste plusieurs années' },
+      { max: 10, color: '#4f8ef7', text: '🔒 Très fort - résiste des siècles' },
     ];
-
     for (const l of levels) {
-      if (score <= l.max) {
-        bar.style.background = l.color;
-        label.style.color = l.color;
-        label.textContent = l.text;
-        break;
-      }
+      if (score <= l.max) { bar.style.background = l.color; label.style.color = l.color; label.textContent = l.text; break; }
     }
-
-    // Crack time
-    const guessesPerSec = 1e10;
-    const combinations = Math.pow(Math.max(charset, 1), len);
-    const seconds = combinations / guessesPerSec / 2;
-    document.getElementById('crackTime').textContent = formatTime(seconds);
-
-    // Hacker view — simulated hash
-    document.getElementById('hackerView').textContent = simulateHash(pwd);
+    const secs = Math.pow(Math.max(cs, 1), len) / 1e10 / 2;
+    document.getElementById('crackTime').textContent = formatTime(secs);
+    document.getElementById('hackerView').textContent = fakeHash(pwd);
   }
 
   function resetPwd() {
-    document.getElementById('pwdLen').textContent = '0 caractères';
-    document.getElementById('entropy').textContent = '— bits';
-    document.getElementById('pwdScore').textContent = '—/10';
-    document.getElementById('crackTime').textContent = '—';
+    ['pwdLen','entropy','pwdScore','crackTime'].forEach(id => {
+      document.getElementById(id).textContent = id === 'pwdLen' ? '0 caractères' : id === 'pwdScore' ? '-/10' : '-';
+    });
     document.getElementById('pwdBar').style.width = '0%';
     document.getElementById('pwdLabel').textContent = 'En attente de saisie...';
     document.getElementById('pwdLabel').style.color = 'var(--text3)';
     document.getElementById('hackerView').textContent = 'Entrez un mot de passe pour voir ce que voit vraiment la base de données...';
   }
 
-  function formatTime(seconds) {
-    if (seconds < 1) return '< 1 seconde';
-    if (seconds < 60) return Math.round(seconds) + ' secondes';
-    if (seconds < 3600) return Math.round(seconds/60) + ' minutes';
-    if (seconds < 86400) return Math.round(seconds/3600) + ' heures';
-    if (seconds < 31536000) return Math.round(seconds/86400) + ' jours';
-    if (seconds < 31536000*1000) return Math.round(seconds/31536000) + ' années';
-    if (seconds < 31536000*1e9) return Math.round(seconds/31536000/1000) + ' milliers d\'années';
-    if (seconds < 31536000*1e12) return Math.round(seconds/31536000/1e6) + ' millions d\'années';
+  function formatTime(s) {
+    if (s < 1)           return 'moins d\'une seconde';
+    if (s < 60)          return Math.round(s) + ' secondes';
+    if (s < 3600)        return Math.round(s/60) + ' minutes';
+    if (s < 86400)       return Math.round(s/3600) + ' heures';
+    if (s < 31536000)    return Math.round(s/86400) + ' jours';
+    if (s < 31536000e3)  return Math.round(s/31536000) + ' années';
+    if (s < 31536000e6)  return Math.round(s/31536000/1e3) + ' milliers d\'années';
+    if (s < 31536000e9)  return Math.round(s/31536000/1e6) + ' millions d\'années';
     return '🌌 Des milliards de milliards d\'années';
   }
 
-  function simulateHash(pwd) {
-    // Simple deterministic "fake hash" for demo
-    const chars = '0123456789abcdef';
-    let hash = '';
+  function fakeHash(pwd) {
+    const hex = '0123456789abcdef';
     let seed = 0;
-    for (let i = 0; i < pwd.length; i++) {
-      seed = ((seed << 5) - seed + pwd.charCodeAt(i)) | 0;
-    }
-    const r = (n) => { seed = (seed * 1664525 + 1013904223) | 0; return Math.abs(seed) % n; };
-    for (let i = 0; i < 64; i++) hash += chars[r(16)];
-    return '$2b$12$' + hash.substring(0,22) + '$' + hash.substring(22);
+    for (let i = 0; i < pwd.length; i++) seed = ((seed << 5) - seed + pwd.charCodeAt(i)) | 0;
+    const r = () => { seed = (seed * 1664525 + 1013904223) | 0; return Math.abs(seed); };
+    let h = '';
+    for (let i = 0; i < 64; i++) h += hex[r() % 16];
+    return '$2b$12$' + h.slice(0,22) + '$' + h.slice(22);
   }
 
-  // ===== TOTP TIMER =====
+  // TOTP
   function updateTotp() {
     const now = Math.floor(Date.now() / 1000);
-    const window30 = Math.floor(now / 30);
-    const remaining = 30 - (now % 30);
-
-    // Generate fake code
-    let seed = window30 * 1664525 + 1013904223;
+    const w = Math.floor(now / 30);
+    const rem = 30 - (now % 30);
+    let seed = w * 1664525 + 1013904223;
     seed = ((seed * 1664525) + 1013904223) | 0;
     const code = String(Math.abs(seed) % 1000000).padStart(6, '0');
-    const formatted = code.substring(0,3) + ' ' + code.substring(3);
-
-    document.getElementById('totpCode').textContent = formatted;
-    document.getElementById('totpBar').style.width = ((remaining / 30) * 100) + '%';
-    document.getElementById('totpBar').style.background = remaining <= 10 ? 'var(--orange)' : 'var(--accent)';
-    document.getElementById('totpTimer').textContent = 'Renouvellement dans ' + remaining + 's';
+    document.getElementById('totpCode').textContent = code.slice(0,3) + ' ' + code.slice(3);
+    document.getElementById('totpBar').style.width = (rem / 30 * 100) + '%';
+    document.getElementById('totpBar').style.background = rem <= 10 ? 'var(--orange)' : 'var(--accent)';
+    document.getElementById('totpTimer').textContent = 'Renouvellement dans ' + rem + 's';
   }
-
   setInterval(updateTotp, 1000);
   updateTotp();
 
-  // ===== TOC DOTS SCROLL SPY =====
-  const sections = ['hero', 'cest-quoi', 'pourquoi', 'chiffrement', 'mfa', 'coffres', 'procedures', 'retraite', 'faq'];
-  const dots = document.querySelectorAll('.toc-dot');
-
+  // Scroll spy
+  const sectionIds = ['hero','cest-quoi','pourquoi','chiffrement','mfa','coffres','procedures','retraite','faq'];
+  const tocDots = document.querySelectorAll('.toc-dot');
   window.addEventListener('scroll', () => {
-    let current = 0;
-    sections.forEach((id, i) => {
+    let cur = 0;
+    sectionIds.forEach((id, i) => {
       const el = document.getElementById(id);
-      if (el && window.scrollY >= el.offsetTop - 200) current = i;
+      if (el && window.scrollY >= el.offsetTop - 220) cur = i;
     });
-    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    tocDots.forEach((d, i) => d.classList.toggle('active', i === cur));
   });
 
-  function scrollTo(id) {
-    const el = document.querySelector(id);
+  function goTo(sel) {
+    const el = document.querySelector(sel);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   }
 </script>
-
 </body>
 </html>
